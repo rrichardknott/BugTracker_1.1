@@ -1,0 +1,43 @@
+﻿@model IEnumerable<BugTracker_1._1.Models.ApplicationUser>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<div class="container">
+    <table class="table" id="userIndexTable">
+    
+            <tr>
+                <th>
+                    @Html.DisplayName("Full Name")
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th></th>
+            </tr>
+    
+    
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>
+                        @*user.FullName // this is also an option for displaying information*@
+                        @Html.DisplayFor(m => user.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => user.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => user.Roles)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Manage Role", "ManageUserRoles", "Assignments", new { id = user.Id }, null)
+                        @Html.ActionLink("Manage Projects", "ManageUserProjects", "Assignments", new { id = user.Id }, null)
+                    </td>
+                </tr>
+            }
+   
+    </table>
+</div>

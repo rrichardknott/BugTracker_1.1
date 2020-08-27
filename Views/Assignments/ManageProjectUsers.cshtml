@@ -1,0 +1,77 @@
+﻿@using BugTracker_1._1.Models;
+@using BugTracker_1._1.Helpers;
+@model IEnumerable<ApplicationUser>
+
+@{
+    ViewBag.Page = "Assign Users";
+    var projectHelper = new ProjectHelper();
+    var roleHelper = new UserRolesHelper();
+}
+
+
+@if (User.IsInRole("Admin") || User.IsInRole("Project Manager"))
+{
+    <div id="assignUsersContainer">
+        @using (Html.BeginForm(null, null, new { @id = "selectUsersProjectsForm" }))
+        {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-lg-6">
+                <h2 class="font-weight-bold">Select Users</h2>
+                @Html.ListBox("UserIds", null, new { @id = "assignUsersListBox" })
+            </div>
+            <div class="col-lg-6">
+                <h2 class="font-weight-bold">Projects</h2>
+                @Html.ListBox("ProjectIds", null, new { @id = "assignProjectsListBox" })
+            </div>
+        </div>
+
+        <div class="row" id="assignUsersProjectsButtonRow">
+            <div class="col-lg-6">
+                <button class="btn  text-white backgroundDarkBlue" id="assignUsersButton" type="submit">Assign Users</button>
+            </div>
+            <div class="col-lg-6">
+                @Html.ActionLink("Back", "Index", "Projects", null, new { @class = "btn  text-white backgroundDarkBlue", @id = "backToProjectsButton" })
+            </div>
+        </div>
+        }
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayName("Role")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Projects")
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => user.Email)
+                        </td>
+                        <td>
+                            @roleHelper.ListUserRoles(user.Id).FirstOrDefault()
+                        </td>
+                        <td>
+                            @foreach (var project in projectHelper.ListUserProjects(user.Id))
+                            {
+                                @project.Name<br />
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+

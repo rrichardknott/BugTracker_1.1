@@ -1,0 +1,99 @@
+﻿@model BugTracker_1._1.Models.RegisterViewModel
+@{
+    ViewBag.Title = "";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="~/Images/favicon.png" type="image/png" rel="icon" />
+    <title>Richlynn Bug Tracker</title>
+    <!-- Custom fonts for this template-->
+    <link href="~/Content/all.css" rel="stylesheet" type="text/css"><!--fontawesome-->
+    <link href="~/Content/styles.css" rel="stylesheet" />
+    <link href="//fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <script src="//unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- Custom styles for this template-->
+    @*<link href="~/Content/sb-admin-2.css" rel="stylesheet">*@
+</head>
+<body class="bg-gradient-primary backgroundDarkBlue">
+
+    <div class="container" id="registerLoginBackground">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center" id="registerLoginBox">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+
+                                        <h1 class="h4 mb-4">Welcome To The<br/> Richlynn Bug Tracker!</h1>
+                                    </div>
+
+                                    <h2>@ViewBag.Title</h2>
+
+                                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <h4  class="colorBrightRed font-weight-bold">Create a new account.</h4>
+                                        <hr />
+                                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                                        <div class="form-group">                        
+                                            <div class="col-md-12">
+                                                @Html.TextBoxFor(m => m.Email, new { @placeholder = "Email", @maxlength = "50" , @class = "form-control form-control-user", @id="registerEmailTextBox" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">                          
+                                            <div class="col-md-12">
+                                                @Html.PasswordFor(m => m.Password, new { @placeholder = "Password", @maxlength = "50", @class = "form-control form-control-user", @id="registerPasswordTextBox" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">                          
+                                            <div class="col-md-12">
+                                                @Html.PasswordFor(m => m.ConfirmPassword, new { @placeholder="Confirm password", @maxlength = "50", @class = "form-control form-control-user", @id="confirmRegisterPasswordTextBox" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <input type="submit" class="btn btn-block btn-user backgroundDarkBlue text-white" id="registerButton" value="Register" />
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Scripts/jquery.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="~/Scripts/bootstrap.bundle.js"></script>
+    <script src="~/Scripts/scripts.js"></script>
+   
+</body>
+
+</html>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

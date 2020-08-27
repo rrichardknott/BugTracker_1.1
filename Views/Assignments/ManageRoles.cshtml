@@ -1,0 +1,67 @@
+﻿@using BugTracker_1._1.Models;
+@using BugTracker_1._1.Helpers;
+@model IEnumerable<ApplicationUser>
+
+@{
+    ViewBag.Page = "Manage Roles";
+    var roleHelper = new UserRolesHelper();
+}
+
+    <div id="assignUsersToRolesContainer">
+
+        @using (Html.BeginForm())
+        {
+            @*<div class="row width-100">
+                <div class="col-lg-6" id="selectUserRolesColumn">
+                    <h2 class="font-weight-bold width-100">Select Users</h2>
+                    @Html.ListBox("UserIds", null, new { @id = "assignUsersToRolesSelectBox" })      
+                </div>
+                <div id="rolesDropDownBox">
+                    <h2 class="font-weight-bold width-100">Roles</h2>
+                    @Html.DropDownList("RoleName", null, new { @id = "" })
+                </div>
+            </div>*@
+
+            <div class="row">
+                @Html.AntiForgeryToken()
+                <div class="col mb-3" id="selectUserRolesColumn">
+                    @Html.ListBox("UserIds", null, new { @id = "selectUserRolesListBox", @class="mb-3" })
+                </div>
+                <div class="col" id="manageRolesDropDownListColumn">
+                    @Html.DropDownList("RoleName", null, "No Role Assigned", new { @class = "width-40" })                   
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="btn backgroundDarkBlue text-white mb-5">Assign Role</button>
+                </div>
+            </div>
+        }
+    </div>
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayName("User Email")
+                </th>
+                <th>
+                    @Html.DisplayName("Role")
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => user.Email)
+                    </td>
+                    <td>
+                        @roleHelper.ListUserRoles(user.Id).FirstOrDefault()
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+

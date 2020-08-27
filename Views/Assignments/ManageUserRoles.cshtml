@@ -1,0 +1,12 @@
+﻿@using BugTracker_1._1.Models;
+@using BugTracker_1._1.Helpers;
+@model IEnumerable<BugTracker_1._1.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "ManageUserRoles";
+    var roleHelper = new UserRolesHelper();
+}
+
+
+<h1>Manage User Roles</h1>
+

@@ -1,0 +1,123 @@
+﻿@using BugTracker_1._1.Models
+
+
+@{
+    ViewBag.Title = "Log In";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="~/Images/favicon.png" type="image/png" rel="icon" />
+    <title>Richlynn Bug Tracker</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="~/Content/all.css" rel="stylesheet" type="text/css"><!--fontawesome-->
+    <link href="~/Content/styles.css" rel="stylesheet" />
+
+    <link href="//fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    @*<link href="~/Content/sb-admin-2.css" rel="stylesheet">*@
+
+</head>
+
+<body class="bg-gradient-primary backgroundDarkBlue">
+
+    <div class="container" id="loginBackground">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center" id="demoLoginBox">
+
+            <div class="col-8">
+                <h3 class="text-white">Welcome To The<br/>Richlynn Bug Tracker!</h3>
+                <div id="demoLoginColumn" class="demo-bg-login-image">         
+                    <section id="demoSection">                       
+                       <h3>Demo Version</h3>
+                    </section>
+                </div>
+
+                <div class="row" id="demoRowLoginButtons">
+                    <div class="col-3">
+                        <!--added here-->
+                        @using (Html.BeginForm("DemoLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "myForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("emailKey", "DemoProjectManagerEmail")
+                            @Html.Hidden("passwordKey", "DemoProjectManagerPassword")
+                            <div class="form-group">
+                                <button type="submit" class="btn backgroundPurple text-white" id="demoLoginProjectManager" />Demo Project Mgr.<br /><i class="fas fa-arrow-alt-circle-right fa-1x"></i>
+                            </div>
+                        }
+                        <!--ends herer-->
+                    </div>
+
+                    <div class="col-3">
+                        <!--added here-->
+                        @using (Html.BeginForm("DemoLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "myForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("emailKey", "DemoDeveloperEmail")
+                            @Html.Hidden("passwordKey", "DemoDeveloperPassword")
+                            <div class="form-group">
+                                <button type="submit" class="btn backgroundGreen text-white" id="demoDeveloper" />Demo Developer<br /><i class="fas fa-arrow-alt-circle-right fa-1x"></i>
+                            </div>
+                        }
+                        <!--ends herer-->
+                    </div>
+
+                    <div class="col-3">
+                        <!--added here-->
+
+                        @using (Html.BeginForm("DemoLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "myForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("emailKey", "DemoSubmitterEmail")
+                            @Html.Hidden("passwordKey", "DemoSubmitterPassword")
+                            <div class="form-group">
+                                <button type="submit" class="btn backgroundYellow text-white" id="demoSubmitter" />Demo Submitter<br /><i class="fas fa-arrow-alt-circle-right fa-1x"></i>
+                            </div>
+                        }
+
+                    </div><!--ends herer-->
+                    <div class="col-3">
+                        <!--added here-->
+
+                        @using (Html.BeginForm("DemoLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "myForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("emailKey", "DemoAdminEmail")
+                            @Html.Hidden("passwordKey", "DemoAdminPassword")
+                            <div class="form-group">
+                                <button type="submit" class="btn backgroundRed text-white" id="demoAdmin" />Demo Admin<br /><i class="fas fa-arrow-alt-circle-right fa-1x"></i>
+                            </div>
+                        }
+
+                    </div><!--ends here-->
+                </div>
+
+            </div>
+           
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Scripts/jquery.js"></script>
+    @*<script src="~/Scripts/bootstrap.bundle.min.js"></script>*@
+
+    <!-- Core plugin JavaScript-->
+    <script src="~/Scripts/bootstrap.bundle.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    @*<script src="~/Scripts/sb-admin-2.js"></script>*@
+
+</body>
+
+</html>

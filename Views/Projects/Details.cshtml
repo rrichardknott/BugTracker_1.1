@@ -1,0 +1,54 @@
+﻿@model BugTracker_1._1.Models.Project
+@using Microsoft.AspNet.Identity;
+
+@{
+    ViewBag.Page = "Project Details";
+}
+
+
+
+<div class="table-responsive">
+    <table  class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Created)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsArchived)
+                </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Created)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.IsArchived)
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<p>
+    @if (User.IsInRole("Admin") || User.IsInRole("Project Manager"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn backgroundDarkBlue text-white width-7" })
+    }
+    @Html.ActionLink("Back", "Index", new { id = Model.Id }, new { @class = "btn backgroundDarkBlue text-white width-7" })
+</p>

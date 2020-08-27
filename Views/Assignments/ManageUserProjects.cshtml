@@ -1,0 +1,21 @@
+﻿@using BugTracker_1._1.Models;
+@using BugTracker_1._1.Helpers;
+@model IEnumerable<ApplicationUser>
+
+@{
+    ViewBag.Title = "ManageUserProjects";
+    var projectHelper = new ProjectHelper();
+}
+
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("UserId", (string)ViewBag.UserId)
+                @Html.ListBox("ProjectIds");
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            }
+        </div>
+    </div>

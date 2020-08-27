@@ -1,0 +1,58 @@
+﻿@model BugTracker_1._1.Models.Project
+
+@{
+    ViewBag.Page = "Delete Project";
+}
+
+<h3 class="colorBrightRed font-weight-bold">Are you sure you want to delete this?</h3>
+<div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Created)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsArchived)
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => model.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Created)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.IsArchived)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color mb-3">
+            <input type="submit" value="Delete" class="btn backgroundRed text-white width-8" />
+            @Html.ActionLink("Back", "Index", null, new { @class="btn backgroundDarkBlue text-white width-8" })
+        </div>
+    }
+</div>

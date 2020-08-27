@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Page = "About";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Bug Tracker - ASP.Net</title>
+    <link href="~/Content/styles.css" rel="stylesheet" />
+    <link href="//cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+    <style>
+        #homeLink{
+            width: 10%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row text-center">
+            <div class="col">
+                <h1>😃</h1>
+                <h3>This Bug Tracker was created by <br/> <a href="mailto:r.richardknott@gmail.com">Richard Knott</a> ~ ASP.Net Full-Stack Developer</h3>
+                <a href="https://richardknottportfolio.netlify.app" target="_blank">Richard Knott Portfolio</a>
+
+                <h2>&copy; 2020</h2>
+                <br/>
+                @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "btn backgroundDarkBlue text-white", @id = "homeLink" })
+            </div>
+        </div>
+
+    </div>
+
+</body>
