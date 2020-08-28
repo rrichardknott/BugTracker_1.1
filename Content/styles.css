@@ -11015,7 +11015,7 @@ th, td{
     width: 90%;
 }
 
-.width-100{
+.width-100 {
     width: 100%;
 }
 
@@ -11096,8 +11096,7 @@ body{
     top: 10%;
 }
 /*Demo Login Page*/
-#demoLoginColumn {
-    color: #ffffff;
+#demoLoginColumn {    
     display: flex;
     height: 70vh;
     flex-direction: column;
@@ -11109,8 +11108,7 @@ body{
     font-size: 2.0rem;
     text-transform: uppercase;
     font-weight: bold;    
-    text-align: center;
-    color: #ffffff;
+    text-align: center;    
     position: relative;
    top: 12%;
     
@@ -11144,6 +11142,10 @@ button #demoLoginAdmin {
     top: 20%;
 }
 
+#demoLoginProjectManager{
+    border: 1px solid #f8f8ff;
+}
+
 #backToLoginVersion {
     position: relative;
     background: none;
@@ -11174,7 +11176,7 @@ button #demoLoginAdmin {
 }
 
 .demo-bg-login-image {
-    background: url("/Images/DemoBugTrackerLogin1.png")!important;
+    background: url("/Images/BugTrackerLogin.jpg")!important;
     background-position-x: center !important;
     background-position-y: center !important;
     border-radius: 1%;
@@ -11200,14 +11202,13 @@ button #demoLoginAdmin {
     font-weight: bold;
 }
 
-/*Home/Index Page*/
-#homeLink {
-    margin-left: 5%;
-}
 
-#logoutForm{
+   
+/*Home/Index Page*/
+
+#logoutForm {
     position: relative;
-    left:40%;
+    left: 40%;
 }
 
 #logoutForm a{
@@ -11230,14 +11231,9 @@ button #demoLoginAdmin {
     top: 25%;    
 }
 
-#homeLink{
-    position: relative;
-    right: 4%;
-}
-
 #aboutLink{
     position: relative;
-    right: 1%;
+    right: -1%;
 }
 
 #loginLink{
@@ -11314,10 +11310,11 @@ button #demoLoginAdmin {
 }
 
 /* Projects/Index*/
-#createProjectButton, #assignUsersToProjectsButton, #removeUsersFromProjectsButton{
+#createProjectButton, #assignUsersToProjectsButton, #assignUsersToRolesButton, #removeUsersFromProjectsButton {
     color: #ffffff;
-    
+    width: 8%;
 }
+
 #projectsIndexDescription{
     width: 35%;
 }
@@ -11358,6 +11355,17 @@ button #demoLoginAdmin {
 
 }
 
+/*Tickets Index*/
+
+#ticketIndexCreateAndBackButton{
+  
+}
+
+
+#ticketIndexBackButton {
+    width: 7%;
+    margin-bottom: 1%;
+}
 
 /*Tickets Create*/
 #ticketBackButton, #createTicketButton {
@@ -11378,11 +11386,6 @@ button #demoLoginAdmin {
     display: none !important;
 }
 
-#ticketDetailsTableBottom {
-    
-    
-}
-
 #ticketDetailsCommentsAndAttachmentsRowContainer {
     border: 1px solid black;    
 }
@@ -11391,11 +11394,15 @@ button #demoLoginAdmin {
     border: 2px solid black!important;
 }
 
-#ticketDetailsCommentsColumnContainer {
-     border-right: 1px solid black;
-   
+#ticketDetailsEditBackButtonContainer{
+    position: relative;
+
 }
 
+#ticketDetailsCommentsColumnContainer {
+    border-right: 1px solid black;
+    position: relative;
+}
 
 
 #ticketDetailsCommentsH2 {
@@ -11415,7 +11422,9 @@ button #demoLoginAdmin {
 }
 
 #ticketCommentForm {
-    position: relative;
+    position: absolute;
+    width: 100%;
+    bottom: 0%;
 }
 
 #ticketDetailsCreateCommentButton{

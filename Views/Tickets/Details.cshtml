@@ -9,6 +9,11 @@
 }
 
 <!--=======================================================-->
+<div class="mb-3" id="ticketDetailsEditBackButtonContainer">
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn backgroundDarkBlue text-white width-8 mt-0", @id="ticketDetailsEditButton" })
+    @Html.ActionLink("Back", "Index", new { id = Model.Id }, new { @class = "btn backgroundDarkBlue text-white width-8 mt-0", @id = "ticketDetailsBackButton" })
+</div>
+
 <h2 class="font-weight-bold">Details</h2>
 <div class="table-responsive" id="ticketDetailsTableTop">
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -18,17 +23,17 @@
                     Project Name
                 </th>
                 <th>
-                   Ticket Description
+                    Ticket Description
                 </th>
                 <th>
                     Priority
                 </th>
                 <th>
                     Status
-                </th>               
+                </th>
                 <th>
                     Type
-                </th>                     
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -47,17 +52,17 @@
                 </td>
                 <td>
                     @Html.DisplayFor(model => model.TicketType.Name)
-                </td>               
+                </td>
             </tr>
         </tbody>
     </table>
 </div>
 
 
-<div class="table-responsive mt-3"  id="ticketDetailsTableBottom">
+<div class="table-responsive mt-3" id="ticketDetailsTableBottom">
     <table class="table table-bordered border-bold" id="dataTable" width="100%" cellspacing="0">
         <thead>
-            <tr> 
+            <tr>
                 <th>
                     Submitter Name
                 </th>
@@ -106,7 +111,7 @@
 <!--=======================================================-->
 
 <div class="row mb-3">
-    @*<div class="col-12">*@       
+    @*<div class="col-12">*@
     <div class="container-fluid">
         <h2 class="font-weight-bold colorBlack pt-3" id="ticketDetailsCommentsH2">Comments</h2>
         <h2 class="font-weight-bold colorBlack pt-3" id="ticketDetailsAttachmentsH2">Attachments</h2>
@@ -219,20 +224,20 @@
                         <tbody>
                             @foreach (var attachment in Model.Attachments.ToList())
                             {
-                            <tr>
-                                <td>
-                                    🟢
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => attachment.FileName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => attachment.Description)
-                                </td>
-                                <td>
-                                    <a target="_blank" href="@attachment.FilePath">@attachment.FilePath</a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>
+                                        🟢
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => attachment.FileName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => attachment.Description)
+                                    </td>
+                                    <td>
+                                        <a target="_blank" href="@attachment.FilePath">@attachment.FilePath</a>
+                                    </td>
+                                </tr>
                             }
                         </tbody>
 
@@ -259,17 +264,17 @@
 
 
 
-                    <div class="form-group pt-3">
-                        <div class="col-md-10 mt-2">
-                            <input type="file" name="file" />
+                        <div class="form-group pt-3">
+                            <div class="col-md-10 mt-2">
+                                <input type="file" name="file" />
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group ">
-                        <div class="col-md-offset-2 col-md-10 ">
-                            <input type="submit" value="Add Attachment" class="btn backgroundDarkBlue text-white mt-2" style="width:30%"/>
+                        <div class="form-group ">
+                            <div class="col-md-offset-2 col-md-10 ">
+                                <input type="submit" value="Add Attachment" class="btn backgroundDarkBlue text-white mt-2" style="width:30%" />
+                            </div>
                         </div>
-                    </div>
                     }
                 }
             </div>
@@ -324,14 +329,10 @@
                     </tbody>
 
                 </table>
-                <div class="ml-3 mb-3">
-                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn backgroundDarkBlue text-white width-8 mt-3" })
-                    @Html.ActionLink("Back to List", "Index", new { id = Model.Id }, new { @class = "btn backgroundDarkBlue text-white width-8 mt-3" })
-                </div>
             </div>
 
-        </div>       
+        </div>
 
-    </div>       
-  
+    </div>
+
 </div>

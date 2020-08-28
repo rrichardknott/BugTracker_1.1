@@ -8,12 +8,18 @@
     ViewBag.Page = "Tickets";
 }
 
-@if (User.IsInRole("Submitter") || (User.IsInRole("Admin")))
-{
-    <p>
-        @Html.ActionLink("Create Ticket", "Create", "Tickets", new { area = "" }, new { @class = "btn backgroundDarkBlue text-white", @id = "createTicketButton" })
-    </p>
-}
+<div id="ticketIndexCreateAndBackButton">
+    @if (User.IsInRole("Submitter") || (User.IsInRole("Admin")))
+    {
+        <p>
+            @Html.ActionLink("Create Ticket", "Create", "Tickets", new { area = "" }, new { @class = "btn backgroundDarkBlue text-white", @id = "createTicketButton" })
+        </p>
+    }
+
+    @Html.ActionLink("Back", "Index", "Projects", new { area = "" }, new { @class = "btn text-white backgroundDarkBlue", @id = "ticketIndexBackButton" })
+
+</div>
+
 <div class="table-responsive">
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
@@ -229,6 +235,6 @@
             </tbody>
 
         </table>
-        
+
     </div>
 }

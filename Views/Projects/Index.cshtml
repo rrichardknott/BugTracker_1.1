@@ -3,15 +3,41 @@
 @using BugTracker_1._1.Helpers;
 @model IEnumerable<BugTracker_1._1.Models.Project>
 
-@if (User.IsInRole("Admin") || User.IsInRole("Project Manager"))
+@{
+    ViewBag.Page = "Projects";
+}
+
+@if (User.IsInRole("Admin"))
 {
     <p>
-        @Html.ActionLink("Create Project", "Create", "Projects", new { area = "" }, new { @class = "btn backgroundDarkBlue text-white", @id = "createProjectButton" })
+        @Html.ActionLink("Create Projects", "Create", "Projects", new { area = "" }, new { @class = "btn backgroundDarkBlue text-white", @id = "createProjectButton" })
         @Html.ActionLink("Assign Users", "ManageProjectUsers", "Assignments", new { area = "" }, new { @class = "btn backgroundDarkBlue text-white", @id = "assignUsersToProjectsButton" })
+        @Html.ActionLink("Assign Roles", "Manageroles", "Assignments", new { area = "" }, new { @class = "btn backgroundDarkBlue text-white", @id = "assignUsersToRolesButton" })
         @Html.ActionLink("Remove Users", "RemoveUserFromProject", "Assignments", new { area = "" }, new { @class = "btn backgroundRed text-white", @id = "removeUsersFromProjectsButton" })
+        @Html.ActionLink("View Tickets", "Index", "Tickets", new { area = "" }, new { @class = "btn backgroundYellow text-white", @id = "viewTicketsButton" })
     </p>
 
 }
+
+@if (User.IsInRole("Project Manager"))
+{
+    <p>
+        @Html.ActionLink("Create Projects", "Create", "Projects", new { area = "" }, new { @class = "btn backgroundDarkBlue text-white", @id = "createProjectButton" })
+        @Html.ActionLink("Assign Users", "ManageProjectUsers", "Assignments", new { area = "" }, new { @class = "btn backgroundDarkBlue text-white", @id = "assignUsersToProjectsButton" })
+        @Html.ActionLink("Remove Users", "RemoveUserFromProject", "Assignments", new { area = "" }, new { @class = "btn backgroundRed text-white", @id = "removeUsersFromProjectsButton" })
+        @Html.ActionLink("View Tickets", "Index", "Tickets", new { area = "" }, new { @class = "btn backgroundYellow text-white", @id = "viewTicketsButton" })
+    </p>
+
+}
+
+@if (User.IsInRole("Developer") || User.IsInRole("Submitter"))
+{
+    <p>
+        @Html.ActionLink("View Tickets", "Index", "Tickets", new { area = "" }, new { @class = "btn backgroundYellow text-white", @id = "viewTicketsButton" })
+    </p>
+
+}
+
 @*added this div*@
 <div class="table-responsive">
     <!--<table id="mytable" class="table">-->

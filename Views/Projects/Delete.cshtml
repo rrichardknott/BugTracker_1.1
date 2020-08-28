@@ -4,6 +4,16 @@
     ViewBag.Page = "Delete Project";
 }
 
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color mb-3">
+        <input type="submit" value="Delete" class="btn backgroundRed text-white width-8" />
+        @Html.ActionLink("Back", "Index", null, new { @class = "btn backgroundDarkBlue text-white width-8" })
+    </div>
+}
+
 <h3 class="colorBrightRed font-weight-bold">Are you sure you want to delete this?</h3>
 <div>
 
@@ -45,14 +55,4 @@
         </table>
     </div>
 
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color mb-3">
-            <input type="submit" value="Delete" class="btn backgroundRed text-white width-8" />
-            @Html.ActionLink("Back", "Index", null, new { @class="btn backgroundDarkBlue text-white width-8" })
-        </div>
-    }
 </div>

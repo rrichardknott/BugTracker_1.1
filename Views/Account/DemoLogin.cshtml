@@ -37,14 +37,28 @@
         <div class="row justify-content-center" id="demoLoginBox">
 
             <div class="col-8">
-                <h3 class="text-white">Welcome To The<br/>Richlynn Bug Tracker!</h3>
-                <div id="demoLoginColumn" class="demo-bg-login-image">         
-                    <section id="demoSection">                       
-                       <h3>Demo Version</h3>
+                <h3 class="colorDarkBlue">Richlynn Bug Tracker!</h3>
+                <div id="demoLoginColumn" class="demo-bg-login-image">
+                    <section id="demoSection">
+                        <h3 class="colorDarkBlue">Demo Version</h3>
                     </section>
                 </div>
-
                 <div class="row" id="demoRowLoginButtons">
+                    <div class="col-3">
+                        <!--added here-->
+
+                        @using (Html.BeginForm("DemoLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "myForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("emailKey", "DemoAdminEmail")
+                            @Html.Hidden("passwordKey", "DemoAdminPassword")
+                            <div class="form-group">
+                                <button type="submit" class="btn backgroundRed text-white" id="demoAdmin" />Demo Admin<br /><i class="fas fa-arrow-alt-circle-right fa-1x"></i>
+                            </div>
+                        }
+
+                    </div><!--ends here-->
+
                     <div class="col-3">
                         <!--added here-->
                         @using (Html.BeginForm("DemoLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "myForm" }))
@@ -53,7 +67,7 @@
                             @Html.Hidden("emailKey", "DemoProjectManagerEmail")
                             @Html.Hidden("passwordKey", "DemoProjectManagerPassword")
                             <div class="form-group">
-                                <button type="submit" class="btn backgroundPurple text-white" id="demoLoginProjectManager" />Demo Project Mgr.<br /><i class="fas fa-arrow-alt-circle-right fa-1x"></i>
+                                <button type="submit" class="btn backgroundDarkBlue text-white" id="demoLoginProjectManager" />Demo Project Mgr.<br /><i class="fas fa-arrow-alt-circle-right fa-1x"></i>
                             </div>
                         }
                         <!--ends herer-->
@@ -87,20 +101,6 @@
                         }
 
                     </div><!--ends herer-->
-                    <div class="col-3">
-                        <!--added here-->
-
-                        @using (Html.BeginForm("DemoLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "myForm" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            @Html.Hidden("emailKey", "DemoAdminEmail")
-                            @Html.Hidden("passwordKey", "DemoAdminPassword")
-                            <div class="form-group">
-                                <button type="submit" class="btn backgroundRed text-white" id="demoAdmin" />Demo Admin<br /><i class="fas fa-arrow-alt-circle-right fa-1x"></i>
-                            </div>
-                        }
-
-                    </div><!--ends here-->
                 </div>
 
             </div>
