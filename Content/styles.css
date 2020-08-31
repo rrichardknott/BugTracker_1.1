@@ -10899,6 +10899,7 @@ body {
     }
 
 /*=====================================MY STYLES=======================================*/
+
 a{
     text-decoration: none!important;
 }
@@ -11022,9 +11023,6 @@ th, td{
 
 
 
-
-
-
 /*Login Page*/
 body{
     padding-top: 50px;
@@ -11056,11 +11054,12 @@ body{
     border: none;
 }
 
+
 #loginGoogleButton, #loginFacebookButton {
     border-radius: 10rem;
     padding: 0.75rem 1rem;
     width: 100%;
-    color: #ffffff;    
+    color: #ffffff;
 }
 
 /*Register Login*/
@@ -11203,9 +11202,22 @@ button #demoLoginAdmin {
 }
 
 
-   
-/*Home/Index Page*/
+/*_Layout Body*/
+#_LayoutBody {
+    background-color: #f5f5f5;
+}
 
+.table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td {
+    background-color: #f5f5f5;
+}
+
+.form-control, textarea, input #isResolved, input #isArchived, input[type=radio], input[type=checkbox], div.dataTables_wrapper div.dataTables_filter input /*Search field*/, div.dataTables_wrapper div.dataTables_length select, select, input .form-control, #navBarSearchBox {
+    background-color: #f5f5f5;
+}
+
+
+
+/*Home/Index Page*/
 #logoutForm {
     position: relative;
     left: 40%;
@@ -11236,11 +11248,7 @@ button #demoLoginAdmin {
     right: -1%;
 }
 
-#loginLink{
-    position: absolute;
-    right: 18%;
-    top:25%;
-}
+
 #h1Dashboard {
     display: inline;
     position: relative;    
@@ -11312,7 +11320,7 @@ button #demoLoginAdmin {
 /* Projects/Index*/
 #createProjectButton, #assignUsersToProjectsButton, #assignUsersToRolesButton, #removeUsersFromProjectsButton {
     color: #ffffff;
-    width: 8%;
+    
 }
 
 #projectsIndexDescription{
@@ -11340,32 +11348,69 @@ button #demoLoginAdmin {
 }
 
 /*Assignments Manage Roles*/
-#assignUsersToRolesSelectBox{
-    height: 25vh;
+
+#assignmentsManageRolesAssignAndBackButtonContainer {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
 }
 
-#manageRolesDropDownListColumn {
-    position: relative;
-    left: -25%;
+#assignmentsManageRolesAssignButton, #assignmentsManageRolesBackButton {
+    width: 100px;
+    margin-right: 0.5%;
+    margin-bottom: 2%;
 }
 
-#selectUserRolesColumn, #selectUserRolesListBox {
-    display: inline-block;
-    height: 20vh;
+#assignmentsManageRolesUserIdAndRoleNameContainerParent {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}
 
+#assignmentsManageRolesUserIdAndRoleNameContainerChild{
+    display: flex;
+    margin-left: 13px;
+
+}
+
+#assignmentsManageRolesUserId{
+    width: 500px;
+    height: 200px;
+}
+
+#assignmentsManageRolesRoleName {
+   width: 500px;
+   margin-left: 13px;
+   margin-bottom: 10px;
 }
 
 /*Tickets Index*/
-
-#ticketIndexCreateAndBackButton{
-  
+#ticketIndexCreateAndBackButtonContainer {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
 }
 
+
+#ticketIndexBackButton, #ticketIndexCreateButton{
+    width: 110px;
+    margin-right: 1%;
+    margin-bottom: 2%;
+    
+}
 
 #ticketIndexBackButton {
-    width: 7%;
-    margin-bottom: 1%;
+
 }
+
+#ticketIndexCreateButton {
+    
+}
+
+
 
 /*Tickets Create*/
 #ticketBackButton, #createTicketButton {

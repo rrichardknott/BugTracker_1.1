@@ -21,6 +21,15 @@ namespace BugTracker_1._1.Helpers
             var currentNumberOfTickets = db.Tickets.Count();
             return currentNumberOfTickets;
         }
+
+        public int NumberOfTicketsOnProject(int projectId)
+        {
+            int numberOfTickets;
+
+            Project project = db.Projects.Find(projectId);
+            numberOfTickets = project.Tickets.Count();
+            return numberOfTickets;
+        }
         
         public bool CanMakeComment(int ticketId )
         {
@@ -53,8 +62,108 @@ namespace BugTracker_1._1.Helpers
 
         public async Task ManageTicketNotifications(Ticket oldTicket, Ticket newTicket)
         {
-            //Scenario 1:  Assignment - Old ticket was not assigned and is now assigned to developer
-            if (oldTicket.DeveloperId == "" && newTicket.DeveloperId != "")
+            //Scenario 1:  Reassignment - Old ticket was assigned to a developer and is now assigned to a new developer
+            if (((oldTicket.DeveloperId != "" || oldTicket.DeveloperId != null) && (newTicket.DeveloperId != "" || newTicket.DeveloperId != null)) && (oldTicket.DeveloperId != newTicket.DeveloperId))
+            {
+                var newTicketNotificationToNewDeveloper = new TicketNotification()
+                {
+                    TicketId = newTicket.Id,
+                    Created = DateTime.Now,
+                    UserId = newTicket.DeveloperId,
+                    Subject = $"You have been assigned a new Ticket: Id = {newTicket.Id}.",
+                    Message = $"Hi {newTicket.Developer.FullName}, you have been assigned a new Ticket: Id = {newTicket.Id}, Project: {newTicket.Project.Name}."
+                };
+                db.TicketNotifications.Add(newTicketNotificationToNewDeveloper);
+
+                var userEmail = db.Users.Find(newTicketNotificationToNewDeveloper.UserId).Email;
+                try
+                {
+                    var email = new MailMessage(from, userEmail)
+                    {
+                        Subject = newTicketNotificationToNewDeveloper.Subject,
+                        Body = newTicketNotificationToNewDeveloper.Message,
+                        IsBodyHtml = true
+                    };
+                    await svc.SendAsync(email);
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine(ex.Message);
+                    await Task.FromResult(0);
+                }
+
+
+                var newTicketNotificationToOldDeveloper = new TicketNotification()
+                {
+                    Created = DateTime.Now,
+                    UserId = oldTicket.DeveloperId,
+                    TicketId = newTicket.Id,
+                    Subject = $"Hi {oldTicket.Developer.FullName}",
+                    Message = $"you have been Unassigned from Ticket {oldTicket.Id}, Project Name: {oldTicket.Project.Name}.  The new developer on this ticket is now {newTicket.Developer.FullName}, please be sure to assist him/ her with any helpful information you may have."
+                };
+                db.TicketNotifications.Add(newTicketNotificationToOldDeveloper);
+
+                userEmail = db.Users.Find(newTicketNotificationToOldDeveloper.UserId).Email;
+                try
+                {
+                    var email = new MailMessage(from, userEmail)
+                    {
+                        Subject = newTicketNotificationToOldDeveloper.Subject,
+                        Body = newTicketNotificationToOldDeveloper.Message,
+                        IsBodyHtml = true
+                    };
+                    await svc.SendAsync(email);
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine(ex.Message);
+                    await Task.FromResult(0);
+                }
+
+                db.SaveChanges();
+
+            }
+
+            //Scenario 2:  Unassignment - Ticket has been unassigned from developer
+            if ((oldTicket.DeveloperId != null || oldTicket.DeveloperId != "") && (newTicket.DeveloperId == null || newTicket.DeveloperId == ""))
+            {
+                var newTicketNotification = new TicketNotification
+                {
+                    Created = DateTime.Now,
+                    TicketId = newTicket.Id,
+                    UserId = oldTicket.DeveloperId,
+                    Subject = $"You have been Unassigned from Ticket Id {oldTicket.Id}.",
+                    Message = $"Hi {oldTicket.Developer.FullName}. You have been Unassigned from Ticket Id {oldTicket.Id}, {oldTicket.Project.Name}."
+                };
+                db.TicketNotifications.Add(newTicketNotification);
+
+                var userEmail = db.Users.Find(newTicketNotification.UserId).Email;
+                try
+                {
+
+                    var email = new MailMessage(from, userEmail)
+                    {
+                        Subject = newTicketNotification.Subject,
+                        Body = newTicketNotification.Message,
+                        IsBodyHtml = true
+                    };
+                    await svc.SendAsync(email);
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine(ex.Message);
+                    await Task.FromResult(0);
+                }
+
+                db.SaveChanges();
+            }
+
+
+            //Scenario 3:  Assignment - Old ticket was not assigned and is now assigned to developer
+            if (oldTicket.DeveloperId == null || oldTicket.DeveloperId == "" && (newTicket.DeveloperId != null || newTicket.DeveloperId != ""))
             {
 
                 var newNotification = new TicketNotification()
@@ -91,112 +200,59 @@ namespace BugTracker_1._1.Helpers
 
             }
 
-            //Scenario 2:  Unassignment - Ticket has been unassigned from developer
-            if (oldTicket.DeveloperId != "" && newTicket.DeveloperId == "")
-            {
-                var newTicketNotification = new TicketNotification
-                {
-                    Created = DateTime.Now,
-                    TicketId = newTicket.Id,
-                    UserId = oldTicket.DeveloperId,
-                    Subject = $"You have been Unassigned from Ticket Id {oldTicket.Id}.",
-                    Message = $"Hi {oldTicket.Developer.FullName}. You have been Unassigned from Ticket Id {oldTicket.Id}, {oldTicket.Project.Name}."
-                };
-                db.TicketNotifications.Add(newTicketNotification);
-
-                var userEmail = db.Users.Find(newTicketNotification.UserId).Email;
-                try
-                {
-                    
-                    var email = new MailMessage(from, userEmail)
-                    {
-                        Subject = newTicketNotification.Subject,
-                        Body = newTicketNotification.Message,
-                        IsBodyHtml = true
-                    };
-                    await svc.SendAsync(email);
-                }
-                catch (Exception ex)
-                {
-
-                    Console.WriteLine(ex.Message);
-                    await Task.FromResult(0);
-                }
-
-                db.SaveChanges();
-            }
-
-            //Scenario 3:  Reassignment - Old ticket was assigned to a developer and is now assigned to a new developer
-            if (oldTicket.DeveloperId != "" && newTicket.DeveloperId != "" && oldTicket.DeveloperId != newTicket.DeveloperId)
-            {
-                var newTicketNotificationToNewDeveloper = new TicketNotification()
-                {
-                    TicketId = newTicket.Id,
-                    Created = DateTime.Now,
-                    UserId = newTicket.DeveloperId,
-                    Subject = $"You have been assigned a new Ticket: Id = {newTicket.Id}.",
-                    Message = $"Hi {newTicket.Developer.FullName}, you have been assigned a new Ticket: Id = {newTicket.Id}, Project: {newTicket.Project.Name}."
-                };
-                db.TicketNotifications.Add(newTicketNotificationToNewDeveloper);
-
-                var userEmail = db.Users.Find(newTicketNotificationToNewDeveloper.UserId).Email;
-                try
-                {
-                    var email = new MailMessage(from, userEmail)
-                    {
-                        Subject = newTicketNotificationToNewDeveloper.Subject,
-                        Body = newTicketNotificationToNewDeveloper.Message,
-                        IsBodyHtml = true
-                    };
-                    await svc.SendAsync(email);
-                }
-                catch (Exception ex)
-                {
-
-                    Console.WriteLine(ex.Message);
-                    await Task.FromResult(0);
-                }
-                
-
-                var newTicketNotificationToOldDeveloper = new TicketNotification()
-                {
-                    Created = DateTime.Now,
-                    UserId = oldTicket.DeveloperId,
-                    TicketId = newTicket.Id,
-                    Subject = $"Hi {oldTicket.Developer.FullName}",
-                    Message = $"you have been Unassigned from Ticket {oldTicket.Id}, Project Name: {oldTicket.Project.Name}.  The new developer on this ticket is now {newTicket.Developer.FullName}, please be sure to assist him/ her with any helpful information you may have."
-                };
-                db.TicketNotifications.Add(newTicketNotificationToOldDeveloper);
-
-                userEmail = db.Users.Find(newTicketNotificationToOldDeveloper.UserId).Email;
-                try
-                {
-                    var email = new MailMessage(from, userEmail)
-                    {
-                        Subject = newTicketNotificationToOldDeveloper.Subject,
-                        Body = newTicketNotificationToOldDeveloper.Message,
-                        IsBodyHtml = true
-                    };
-                    await svc.SendAsync(email);
-                }
-                catch (Exception ex)
-                {
-
-                    Console.WriteLine(ex.Message);
-                    await Task.FromResult(0);
-                }
-
-                db.SaveChanges();
-
-            }
+            
         }
-
-
-
         public List<TicketNotification> GetUnreadNotifications()
         {
             var currentUserId = HttpContext.Current.User.Identity.GetUserId();
             return db.TicketNotifications.Include("Sender").Where(t => t.UserId == currentUserId && !t.IsRead).ToList();
+        }
+
+        public bool IsMyTicket(int id)
+        {
+            var allowed = false;
+            var userId = HttpContext.Current.User.Identity.GetUserId();
+            var ticket = db.Tickets.AsNoTracking().FirstOrDefault(t => t.Id == id);
+            var userRole = roleHelper.ListUserRoles(userId).FirstOrDefault();
+
+            if (userRole == "Admin")
+            {
+                allowed = true;
+            }
+
+            else if (userRole == "Developer")
+            {
+                if (ticket.DeveloperId == userId)
+                {
+                    allowed = true;
+                }
+            }
+            else if (userRole == "Submitter")
+            {
+                if (ticket.SubmitterId == userId)
+                {
+                    allowed = true;
+                }
+            }
+            else if (userRole == "Project Manager")
+            {
+                // If the ticket is on one of the PM's projects
+                var user = db.Users.Find(userId);
+                if (user.Projects.SelectMany(p => p.Tickets).Select(t => t.Id).Contains(id))
+                {
+                    allowed = true;
+                }
+            }
+
+            else
+            {
+                allowed = false;
+            }
+
+
+            return (allowed);
+        
+        
         }
 
     }

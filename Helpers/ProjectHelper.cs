@@ -19,6 +19,21 @@ namespace BugTracker_1._1.Helpers
             
         }
 
+        public List<string> NameOfProject()            
+        {
+            List<string> listOfProjectNames = new List<string>();
+            foreach (var item in db.Projects)
+            {
+                if (item.Name != "")
+                {
+                    listOfProjectNames.Add(item.Name);
+                }
+            }
+
+
+            return listOfProjectNames;
+        }
+
         
 
         public bool IsUserOnProject(string userId, int projectId)

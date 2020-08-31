@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -160,6 +161,7 @@ namespace BugTracker_1._1.Controllers
         }
 
         // GET: Tickets/Edit/5
+        [Authorize(Roles = "Admin, Developer, Project Manager, Submitter")]
         public ActionResult Edit(int? id)
         {
             
@@ -167,11 +169,40 @@ namespace BugTracker_1._1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Ticket ticket = db.Tickets.Find(id);
-            if (ticket == null)
+
+            if (ticketHelper.IsMyTicket((int)id) == false)
             {
-                return HttpNotFound();
+                TempData["ErrorMessage"] = $"You are not authorized to edit Ticket Id: {id}. The Developer on this Ticket is {ticket.Developer.FullName} and the Submitter on this Ticket is {ticket.Submitter.FullName}.";
+                return RedirectToAction("Unauthorized", "Tickets");
             }
+
+            // Below is good code to determine if the developer or submitter have the same id as the ticket//
+
+            
+
+            //if (ticket == null)
+            //{
+            //    return HttpNotFound();
+            //}            
+            
+            //if (User.IsInRole("Developer"))
+            //{
+            //    if (ticket.DeveloperId != User.Identity.GetUserId())
+            //    {
+            //        return HttpNotFound();
+            //    }
+            //}
+
+            //if (User.IsInRole("Submitter"))
+            //{
+            //    if (ticket.SubmitterId != User.Identity.GetUserId())
+            //    {
+            //        return HttpNotFound();
+            //    }
+            //}
+            //============================================================================//
            
             ViewBag.DeveloperId = new SelectList(projectHelper.ListUsersOnProjectInRole(ticket.ProjectId, "Developer"), "Id", "FullName", ticket.DeveloperId);
             ViewBag.TicketPriorityId = new SelectList(db.TicketPriorities, "Id", "Name", ticket.TicketPriorityId);
@@ -212,6 +243,11 @@ namespace BugTracker_1._1.Controllers
             ViewBag.SubmitterId = new SelectList(db.Users, "Id", "FullName", ticket.SubmitterId);
             ViewBag.DeveloperId = new SelectList(db.Users, "Id", "FullName", ticket.DeveloperId);
             return View(ticket);
+        }
+
+        public ActionResult Unauthorized()
+        {
+            return View();
         }
 
         protected override void Dispose(bool disposing)

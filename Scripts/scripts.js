@@ -1,3 +1,5 @@
+
+
 /*!
     * Start Bootstrap - SB Admin v6.0.1 (https://startbootstrap.com/templates/sb-admin)
     * Copyright 2013-2020 Start Bootstrap
@@ -25,5 +27,7 @@
             e.preventDefault();
             swal("Awesome!", "You successfully registered!", "success");
         });*/
+    
+
      
 })(jQuery);

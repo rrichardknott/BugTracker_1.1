@@ -8,12 +8,12 @@
     ViewBag.Page = "Tickets";
 }
 
-<div id="ticketIndexCreateAndBackButton">
+<div id="ticketIndexCreateAndBackButtonContainer">
     @if (User.IsInRole("Submitter") || (User.IsInRole("Admin")))
     {
-        <p>
-            @Html.ActionLink("Create Ticket", "Create", "Tickets", new { area = "" }, new { @class = "btn backgroundDarkBlue text-white", @id = "createTicketButton" })
-        </p>
+        
+            @Html.ActionLink("Create Ticket", "Create", "Tickets", new { area = "" }, new { @class = "btn backgroundDarkBlue text-white", @id = "ticketIndexCreateButton" })
+        
     }
 
     @Html.ActionLink("Back", "Index", "Projects", new { area = "" }, new { @class = "btn text-white backgroundDarkBlue", @id = "ticketIndexBackButton" })
@@ -130,17 +130,11 @@
 </div>
 
 
-
-
-
-
-
-
 <hr />
 @if (User.IsInRole("Developer") || (User.IsInRole("Admin")))
 
 {
-    <h3>Developer Tickets (Tickets you are assigned)</h3>
+    <h3>Developer Tickets (Tickets assigned to you)</h3>
     <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
@@ -226,8 +220,8 @@
                             @Html.DisplayFor(modelItem => item.IsArchived)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                            @Html.ActionLink("Details", "Details", new { id = item.Id })
 
                         </td>
                     </tr>
