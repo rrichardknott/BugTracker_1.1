@@ -16,6 +16,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="~/Images/favicon.png" type="image/png" rel="icon" />
+
     <title>Richlynn Bug Tracker</title>
 
     <!-- Custom fonts for this template-->
@@ -23,6 +24,7 @@
     <link href="~/Content/styles.css" rel="stylesheet" />
 
     <link href="//fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css2?family=Bilbo+Swash+Caps&display=swap" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     @*<link href="~/Content/sb-admin-2.css" rel="stylesheet">*@
@@ -47,7 +49,7 @@
                                 <div class="p-5">
                                     <div class="text-center">
 
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome!<br />Richlynn Bug Tracker</h1>
+                                        <h2 class="text-gray-900 mb-4" id="loginTitle"><span id="loginTitleR">R</span>ichlynn Bug Tracker</h2>
                                     </div>
 
                                     <section id="loginForm">
@@ -84,28 +86,28 @@
                                             </div>
 
                                             <hr>
-                                            
-                                            <ul class="nav navbar-nav" id="loginForgotPasswordAndDemoLinksUL">
-                                                <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "loginRegisterLink" })</li>
-                                                <li>@Html.ActionLink("Forgot password?", "ForgotPassword", "Account", routeValues: null, htmlAttributes: new { id = "forgotPasswordLink" })</li>
+                                            <div id="loginForgotPasswordAndDemoLinksUL">
                                                 
-                                                
-                                                @*<li>@Html.ActionLink("Resend Email Confirmation", "ResendEmailConfirmation", "Account", routeValues: null, htmlAttributes: new { id = "resendEmailConfirmationLink" })</li>*@
-                                                <li>@Html.ActionLink("Log in as a Demo user", "DemoLogin", "Account", routeValues: null, htmlAttributes: new { id = "demoLoginLink" })</li>
-                                            </ul>
+                                                    @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "loginRegisterLink" }) &nbsp;| 
+                                                    @Html.ActionLink("Forgot password?", "ForgotPassword", "Account", routeValues: null, htmlAttributes: new { id = "forgotPasswordLink" })
+
+
+                                                    @*<li>@Html.ActionLink("Resend Email Confirmation", "ResendEmailConfirmation", "Account", routeValues: null, htmlAttributes: new { id = "resendEmailConfirmationLink" })</li>*@
+                                            </div>
+                                            @Html.ActionLink("Log in as a Demo user", "DemoLogin", "Account", routeValues: null, htmlAttributes: new { id = "demoLoginLink" })                                            
                                         }
 
 
-                                    <hr />
+                                        <hr />
                                         <!--Third party logins-->
                                         @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-                                        
+
                                         @*<a href="#" class="btn btn-google btn-user btn-block backgroundRed" id="loginGoogleButton">
-                                            <i class="fab fa-google fa-fw"></i> Login with Google
-                                        </a>
-                                        <a href="#" class="btn btn-facebook btn-user btn-block backgroundDarkBlue" id="loginFacebookButton">
-                                            <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                                        </a>*@
+            <i class="fab fa-google fa-fw"></i> Login with Google
+        </a>
+        <a href="#" class="btn btn-facebook btn-user btn-block backgroundDarkBlue" id="loginFacebookButton">
+            <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+        </a>*@
                                     </section>
                                    
                                 </div>
@@ -121,7 +123,7 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="~/Scripts/jquery.js"></script>
+    <script src="~/Scripts/jquery.js"></link>
     @*<script src="~/Scripts/bootstrap.bundle.min.js"></script>*@
 
     <!-- Core plugin JavaScript-->

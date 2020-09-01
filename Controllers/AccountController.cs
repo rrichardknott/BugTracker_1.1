@@ -55,21 +55,14 @@ namespace BugTracker_1._1.Controllers
             }
         }
 
-        //
-        // GET: /Account/LoginCopy
-        [AllowAnonymous]
-        public ActionResult LoginCopy(string returnUrl)
-        {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
-        }
-
+        
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            var placeHolder = new LoginViewModel();
             ViewBag.ReturnUrl = returnUrl;
-            return View();
+            return View(placeHolder);
         }
 
         //

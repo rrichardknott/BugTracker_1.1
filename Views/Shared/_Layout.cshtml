@@ -53,6 +53,7 @@
     <link href="//cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
     <link href="~/Content/datatables.css" rel="stylesheet" />
     @Scripts.Render("~/bundles/modernizr")
+    <link href="//fonts.googleapis.com/css2?family=Bilbo+Swash+Caps&display=swap" rel="stylesheet">
     <script src="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     <script src="//unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js" integrity="sha512-QEiC894KVkN9Tsoi6+mKf8HaCLJvyA6QIRzY5KrfINXYuP9NxdIkRQhGq3BZi0J4I7V5SidGM3XUQ5wFiMDuWg==" crossorigin="anonymous"></script>
@@ -185,54 +186,54 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid">
-                    <h2 id="h1Dashboard">Dashboard @ViewBag.Page</h2>
                     <div class="row" id="mainTopCardRow">
                         <div class="col-xl-3 col-md-6">
+                            <!--below here-->
                             <div class="card backgroundRed text-white mb-4">
-                                <div class="h3 card-body backgroundRed text-uppercase">For Administrators</div>
-                                <div class="card-footer d-flex align-items-center justify-content-between  backgroundRed">
-                                    <a class="small text-white stretched-link" href="@Url.Action("Index","Projects")">View All: Projects (@ViewBag.ProjectCount) and Tickets (@ViewBag.TicketCount)</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                <div class="h3 card-body backgroundRed text-uppercase">Administrators</div>
+                                <div class="d-flex align-items-center justify-content-between backgroundRed">
+                                    <a class="small text-white" href="@Url.Action("Index","Projects")"><h5><ul><li>Create and Edit Projects and Tickets</li><li>Assign all Users to Projects and Ticket</li></ul></h5></a>
+                                    <div class="small text-white"></i></div>
                                 </div>
                             </div>
+                            <!--above here-->
                         </div>
                         <div class="col-xl-3 col-md-6">
                             <div class="card backgroundDarkBlue text-white mb-4">
-                                <div class=" h3 card-body backgroundDarkBlue text-uppercase">For Project Mgrs.</div>
-                                <div class="card-footer d-flex align-items-center justify-content-between backgroundDarkBlue">
-                                    <a class="small text-white stretched-link" href="@Url.Action("Index","Projects")">View All</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                <div class=" h3 card-body backgroundDarkBlue text-uppercase">Project Mgrs.</div>
+                                <div class="d-flex align-items-center justify-content-between backgroundDarkBlue">
+                                    <a class="small text-white stretched-link" href="@Url.Action("Index","Projects")"><h5><ul><li>Create and Edit your Projects and Tickets</li><li>Add comments/attachments to Tickets</li></ul></h5></a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-3 col-md-6">
                             <div class="card backgroundGreen text-white mb-4">
-                                <div class="h3 card-body backgroundGreen text-uppercase">For Developers</div>
-                                <div class="card-footer d-flex align-items-center justify-content-between backgroundGreen">
-                                    <a class="small text-white stretched-link" href="@Url.Action("Index","Projects")">View All</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                <div class="h3 card-body backgroundGreen text-uppercase">Developers</div>
+                                <div class="d-flex align-items-center justify-content-between backgroundGreen">
+                                    <a class="small text-white stretched-link" href="@Url.Action("Index","Projects")"><h5><ul><li>View your Project Tickets</li><li>View your assigned Tickets</li></ul></h5></a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-3 col-md-6">
                             <div class="card backgroundYellow text-white mb-4">
-                                <div class="h3 card-body backgroundYellow text-uppercase">For Submitters</div>
-                                <div class="card-footer d-flex align-items-center justify-content-between backgroundYellow">
-                                    <a class="small text-white stretched-link" href="@Url.Action("Index","Projects")">View All</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                <div class="h3 card-body backgroundYellow text-uppercase">Submitters</div>
+                                <div class="d-flex align-items-center justify-content-between backgroundYellow">
+                                    <a class="small text-white stretched-link" href="@Url.Action("Index","Projects")"><h5><ul><li>View your assigned Projects</li><li>View and edit your assigned Tickets</li></ul></h5></a>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     @RenderBody()
+                    
                     <!--MY CHART BEGINS-->
-                    
-                        <canvas id="myChart"> </canvas>
-                        
-                    
+
+                    <canvas id="myChart"> </canvas>
+
+
                     <!--MY CHART ENDS-->
 
-                  
+
                 </div>
             </main>
             <footer class="py-4 bg-light">

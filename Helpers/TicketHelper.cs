@@ -62,8 +62,8 @@ namespace BugTracker_1._1.Helpers
 
         public async Task ManageTicketNotifications(Ticket oldTicket, Ticket newTicket)
         {
-            //Scenario 1:  Reassignment - Old ticket was assigned to a developer and is now assigned to a new developer
-            if (((oldTicket.DeveloperId != "" || oldTicket.DeveloperId != null) && (newTicket.DeveloperId != "" || newTicket.DeveloperId != null)) && (oldTicket.DeveloperId != newTicket.DeveloperId))
+            //Scenario 1:  Reassignment - Old ticket was assigned to one developer and is now assigned to another  developer
+            if ((oldTicket.DeveloperId != "" && (newTicket.DeveloperId != "")) && (oldTicket.DeveloperId != newTicket.DeveloperId))
             {
                 var newTicketNotificationToNewDeveloper = new TicketNotification()
                 {
@@ -74,7 +74,8 @@ namespace BugTracker_1._1.Helpers
                     Message = $"Hi {newTicket.Developer.FullName}, you have been assigned a new Ticket: Id = {newTicket.Id}, Project: {newTicket.Project.Name}."
                 };
                 db.TicketNotifications.Add(newTicketNotificationToNewDeveloper);
-
+                db.SaveChanges();
+                
                 var userEmail = db.Users.Find(newTicketNotificationToNewDeveloper.UserId).Email;
                 try
                 {
@@ -103,6 +104,7 @@ namespace BugTracker_1._1.Helpers
                     Message = $"you have been Unassigned from Ticket {oldTicket.Id}, Project Name: {oldTicket.Project.Name}.  The new developer on this ticket is now {newTicket.Developer.FullName}, please be sure to assist him/ her with any helpful information you may have."
                 };
                 db.TicketNotifications.Add(newTicketNotificationToOldDeveloper);
+                db.SaveChanges();
 
                 userEmail = db.Users.Find(newTicketNotificationToOldDeveloper.UserId).Email;
                 try
@@ -122,22 +124,23 @@ namespace BugTracker_1._1.Helpers
                     await Task.FromResult(0);
                 }
 
-                db.SaveChanges();
+                //db.SaveChanges();
 
             }
 
-            //Scenario 2:  Unassignment - Ticket has been unassigned from developer
-            if ((oldTicket.DeveloperId != null || oldTicket.DeveloperId != "") && (newTicket.DeveloperId == null || newTicket.DeveloperId == ""))
+            //Scenario 2:  Assignment to Unassignment - Old Ticket was assigned and has now been Unassigned from developer
+            if ((oldTicket.DeveloperId != "") && (newTicket.DeveloperId == ""))
             {
                 var newTicketNotification = new TicketNotification
                 {
                     Created = DateTime.Now,
-                    TicketId = newTicket.Id,
+                    TicketId = oldTicket.Id, // changed from newTicket.Id 8/31/2020
                     UserId = oldTicket.DeveloperId,
                     Subject = $"You have been Unassigned from Ticket Id {oldTicket.Id}.",
                     Message = $"Hi {oldTicket.Developer.FullName}. You have been Unassigned from Ticket Id {oldTicket.Id}, {oldTicket.Project.Name}."
                 };
                 db.TicketNotifications.Add(newTicketNotification);
+                db.SaveChanges();// added 8/31/2020
 
                 var userEmail = db.Users.Find(newTicketNotification.UserId).Email;
                 try
@@ -158,12 +161,12 @@ namespace BugTracker_1._1.Helpers
                     await Task.FromResult(0);
                 }
 
-                db.SaveChanges();
+                //db.SaveChanges();
             }
 
 
-            //Scenario 3:  Assignment - Old ticket was not assigned and is now assigned to developer
-            if (oldTicket.DeveloperId == null || oldTicket.DeveloperId == "" && (newTicket.DeveloperId != null || newTicket.DeveloperId != ""))
+            //Scenario 3:  Unassignment to Assignment - Old ticket was not assigned and is now assigned to developer
+            if (oldTicket.DeveloperId == "" && newTicket.DeveloperId != "")
             {
 
                 var newNotification = new TicketNotification()
@@ -177,6 +180,7 @@ namespace BugTracker_1._1.Helpers
                 };
 
                 db.TicketNotifications.Add(newNotification);
+                db.SaveChanges();// added 8/31/2020
 
                 var userEmail = db.Users.Find(newNotification.UserId).Email;
                 try
@@ -196,12 +200,11 @@ namespace BugTracker_1._1.Helpers
                     await Task.FromResult(0);
                 }
 
-                db.SaveChanges();
+                //db.SaveChanges();
 
-            }
-
-            
+            }            
         }
+
         public List<TicketNotification> GetUnreadNotifications()
         {
             var currentUserId = HttpContext.Current.User.Identity.GetUserId();

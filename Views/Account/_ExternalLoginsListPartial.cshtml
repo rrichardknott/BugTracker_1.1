@@ -34,10 +34,10 @@
                             else if (p.Caption.ToLower() == "microsoft")
                             {
                                 style = "btn backgroundDarkBlue text-white width-100 googleThirdParyAuthorizationButton mb-2";
-                                icon = "microsoft";
+                                icon = "windows";
                             }
 
-                            <button type="submit" class="@style" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType <i class="fab fa-@icon fa-fw"></i></button>
+                            <button type="submit" class="h2 @style" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType <i class="fab fa-@icon fa-fw"></i></button>
                         }
                     }
                 </p>

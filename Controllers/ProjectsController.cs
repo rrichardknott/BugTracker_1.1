@@ -67,7 +67,8 @@ namespace BugTracker_1._1.Controllers
         [Authorize(Roles = "Admin, Project Manager")]
         public ActionResult Create()
         {
-            return View();
+            var model = new Project();
+            return View(model);
         }
 
         // POST: Projects/Create
@@ -83,6 +84,7 @@ namespace BugTracker_1._1.Controllers
                 project.Created = DateTime.Now;
                 db.Projects.Add(project);
                 db.SaveChanges();
+                projectHelper.AddUserToProject(User.Identity.GetUserId(), project.Id);//Added 8/31/2020
                 return RedirectToAction("Index");
             }
 

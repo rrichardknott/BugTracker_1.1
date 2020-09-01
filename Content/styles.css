@@ -10984,6 +10984,10 @@ th, td{
     width: 10%;
 }
 
+.width-18{
+    width: 18%;
+}
+
 .width-20 {
     width: 20%;
 }
@@ -11054,6 +11058,9 @@ body{
     border: none;
 }
 
+#loginForgotPasswordAndDemoLinksU{
+    display: flex;
+}
 
 #loginGoogleButton, #loginFacebookButton {
     border-radius: 10rem;
@@ -11061,6 +11068,22 @@ body{
     width: 100%;
     color: #ffffff;
 }
+
+#loginTitle {
+    font-weight: 500;
+    font-family: 'Bilbo Swash Caps', cursive;
+    margin-right: 2%;
+    color: darkred;
+    letter-spacing: 5px;
+   
+}
+
+#loginTitleR {
+   font-size: 48px;
+}
+
+
+
 
 /*Register Login*/
 #registerLoginBox {
@@ -11095,6 +11118,8 @@ body{
     top: 10%;
 }
 /*Demo Login Page*/
+
+
 #demoLoginColumn {    
     display: flex;
     height: 70vh;
@@ -11104,18 +11129,66 @@ body{
 }
 
 #demoLoginBox h3 {
-    font-size: 2.0rem;
-    text-transform: uppercase;
-    font-weight: bold;    
+    font-size: 2.0rem;   
+    font-weight: 500;
     text-align: center;    
     position: relative;
-   top: 12%;
+    top: 12%;
     
 }
 
 #demoLoginWelcomeContainer {
     position: relative;
     
+}
+
+.demoLoginTitle {
+    font-weight: 500;
+    font-family: 'Bilbo Swash Caps', cursive;
+    margin-right: 2%;
+    color: darkred;
+    letter-spacing: 5px;
+}
+
+.demoLoginTitleR {
+    font-size: 48px;
+}
+/*===========TOOLTIP DEMO ADMIN============*/
+[data-tooltip]{
+    position: relative;
+    cursor: default;
+}
+
+[data-tooltip]::after {
+    position: absolute;
+    width: 250px;
+    left: calc(50% - 125px);
+    bottom: 150%;
+    text-align: center;
+    box-sizing: border-box;
+
+
+
+    content:attr(data-tooltip);
+    color: white;
+    background: #303030;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 0.9em;
+    
+
+
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s, transform, 0.2s;
+
+}
+
+[data-tooltip]:hover::after{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
 /*button #demoLoginAdmin{
@@ -11252,7 +11325,7 @@ button #demoLoginAdmin {
 #h1Dashboard {
     display: inline;
     position: relative;    
-    color: #00008b;
+    color: darkred;
 }
 
 #searchIcon{
@@ -11286,8 +11359,10 @@ button #demoLoginAdmin {
 }
 
 #mainTopCardRow{
+    
     font-size: 120%;
     font-weight: bold;
+    width: 100%;
 }
 
 #sideNavLoggedInRole{
@@ -11488,11 +11563,46 @@ button #demoLoginAdmin {
 /*Ticket Edit*/
 #ticketEditContainer {
     border: 2px solid black;
+    width: 98.5%;
 }
 
-/*For third party auth google button*/
+#ticketEditColumnsContainer{
+    display: flex;
+    width: 100%;
+}
 
-.googleThirdParyAuthorizationButton {    
+#ticketEditLeftColumn {
+    width: 100%;
+}
+
+#ticketEditRightColumn{
+    width: 100%;
+}
+
+#ticketEditIsResolvedAndIsArchivedCheckboxContainer{
+    display: flex;
+    width: 100%;     
+    margin-left: 2%;
+    
+
+}
+
+#ticketEditIsResolvedCheckbox, #ticketEditIsArchivedCheckbox {
+    
+    width: 12%;
+}
+
+#ticketEditIsResolvedCheckbox{
+    
+}
+
+#ticketEditIsArchivedCheckbox{
+    margin-left: 100px;
+}
+
+
+/*For third party auth google button*/
+.googleThirdParyAuthorizationButton {
     border-radius: 10rem;
     padding: 0.75rem 1rem;
     position: relative;
