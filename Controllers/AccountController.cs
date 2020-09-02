@@ -177,7 +177,8 @@ namespace BugTracker_1._1.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            var userModel = new RegisterViewModel();
+            return View(userModel);
         }
 
         //
@@ -294,7 +295,8 @@ namespace BugTracker_1._1.Controllers
         [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
-            return View();
+            var forgotPassword = new ForgotPasswordViewModel();
+            return View(forgotPassword);
         }
 
         //
@@ -306,12 +308,12 @@ namespace BugTracker_1._1.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
+                var user = await UserManager.FindByEmailAsync(model.Email);
                 if (user == null)
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     //return View("ForgotPasswordConfirmation");
-                    return View("Login", "Account");
+                    return RedirectToAction("Login");
                 }
 
                 // For more information on how to enable account confirmation and password reset please visit //go.microsoft.com/fwlink/?LinkID=320771 // Send an email with this link
@@ -359,7 +361,8 @@ namespace BugTracker_1._1.Controllers
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
-            return code == null ? View("Error") : View();
+            ResetPasswordViewModel resetPasswordViewModel = new ResetPasswordViewModel();
+            return code == null ? View("Error") : View(resetPasswordViewModel);
         }
 
         //

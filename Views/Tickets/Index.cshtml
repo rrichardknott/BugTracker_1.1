@@ -11,14 +11,16 @@
 <div id="ticketIndexCreateAndBackButtonContainer">
     @if (User.IsInRole("Submitter") || (User.IsInRole("Admin")))
     {
-        
-            @Html.ActionLink("Create Ticket", "Create", "Tickets", new { area = "" }, new { @class = "btn backgroundDarkBlue text-white", @id = "ticketIndexCreateButton" })
-        
+
+        @Html.ActionLink("Create Ticket", "Create", "Tickets", new { area = "" }, new { @class = "btn backgroundDarkBlue text-white", @id = "ticketIndexCreateButton" })
+
     }
 
     @Html.ActionLink("Back", "Index", "Projects", new { area = "" }, new { @class = "btn text-white backgroundDarkBlue", @id = "ticketIndexBackButton" })
 
 </div>
+<hr />
+
 
 <div class="table-responsive">
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -46,7 +48,7 @@
                     @Html.DisplayName("Issue")
                 </th>
                 <th>
-                    @Html.DisplayName("IssueDescription")
+                    @Html.DisplayName("Description")
                 </th>
                 <th>
                     @Html.DisplayName("Created")
@@ -162,7 +164,7 @@
                         @Html.DisplayName("Issue")
                     </th>
                     <th>
-                        @Html.DisplayName("IssueDescription")
+                        @Html.DisplayName("Description")
                     </th>
                     <th>
                         @Html.DisplayName("Created")

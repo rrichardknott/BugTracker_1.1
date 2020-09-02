@@ -16,23 +16,29 @@
 @{
     var projectHelper = new ProjectHelper();
     var ticketHelper = new TicketHelper();
-
+    var userHelper = new UserHelper();
     if (User.Identity.GetUserId() != null)
     {
         var userRolesHelper = new UserRolesHelper();
         var userId = User.Identity.GetUserId();
+        var userName = userHelper.GetFullName(userId);
         var currentRole = userRolesHelper.ListUserRoles(userId).FirstOrDefault();
+
         if (currentRole != null)
         {
             ViewBag.Role = currentRole;
+            ViewBag.Name = userName;
         }
         else
         {
             ViewBag.Role = "No Role Assigned";
+            ViewBag.Name = "User";
         }
+
+
     }
 
-
+    
     ViewBag.ProjectCount = projectHelper.NumberOfProjects();
     ViewBag.TicketCount = ticketHelper.TotalNumberOfTickets();
 }
@@ -59,12 +65,16 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js" integrity="sha512-QEiC894KVkN9Tsoi6+mKf8HaCLJvyA6QIRzY5KrfINXYuP9NxdIkRQhGq3BZi0J4I7V5SidGM3XUQ5wFiMDuWg==" crossorigin="anonymous"></script>
     <link href="~/Content/styles.css" rel="stylesheet" />
 </head>
+
+
+
 <body class="sb-nav-fixed" id="_LayoutBody">
     <nav class="sb-topnav navbar navbar-expand navbar-dark backgroundCharcoal" id="topNavbar">
-        <a class="navbar-brand" href="#">Richlynn Bug Tracker</a>
+        
+        <h4 class="brandTitle colorGoldenRod" href="@Url.Action("Index", "Home")">Richlynn Bug Tracker!</h4>
         <button class="btn btn-link btn-lg order-1 order-lg-0 text-white" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
-        @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "text-white", @id = "homeLink" })
-        @Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "text-white", @id = "aboutLink" })
+        @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "text-white", id = "homeLink" })
+        @Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "text-white", id = "aboutLink" })
 
 
 
@@ -76,7 +86,7 @@
 
                 <ul class="nav navbar-nav" id="topNavUL">
                     <li>
-                        @Html.ActionLink("Hello " + User.Identity.Name + "!", null, null, htmlAttributes: new { @id = "fullEmail", @class = "text-white" })
+                        @Html.ActionLink($"Hello, {ViewBag.Name}", null, null, htmlAttributes: new { id = "fullEmail", @class = "text-white" })
                     </li>
 
                 </ul>
@@ -90,18 +100,15 @@
             </ul>
         }
 
-
-
-
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
 
-            <div class="input-group">
-                <input class="form-control" id="navBarSearchBox"type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
+            @*<div class="input-group">
+                <input class="form-control" id="navBarSearchBox" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
                 <div class="input-group-append">
                     <button class="btn backgroundDarkBlue" type="button"><i class="fas fa-search" id="searchIcon"></i></button>
                 </div>
-            </div>
+            </div>*@
         </form>
         <!-- Navbar-->
         <ul class="navbar-nav ml-auto ml-md-0">
@@ -114,11 +121,10 @@
                     {
                         @Html.AntiForgeryToken()
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                            @*<a class="dropdown-item colorBlack" href="#">Settings</a>
-                                <a class="dropdown-item colorBlack" href="#">Activity Log</a>*@
-                           @User.Identity.Name;
-                                <div class="dropdown-divider"></div>
-                            <a class="dropdown-item colorBlack" href="javascript:document.getElementById('logoutForm1').submit()">Log off</a>
+
+                            <span class="ml-3 mt-0">@ViewBag.Name</span>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item colorBlack" href="javascript:document.getElementById('logoutForm1').submit()">Log off<i class="fas fa-sign-out-alt colorBlack ml-3"></i></a>
                         </div>
                     }
                 }
@@ -134,55 +140,80 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading text-white"></div>
-                        <a id="homePageLeftColumnDashboardLink" href="@Url.Action("Index","Home")"><i class="fas fa-tachometer-alt" id="faTachometer"></i>Dashboard</a>
-                       
-                      
-                        <div>
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <div>
-                                    <a class="nav-link text-white" href="@Url.Action("Index","Projects")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">Admin</a>
-                                </div>
-                                <div>
-                                    <a class="nav-link text-white" href="@Url.Action("Index","Projects")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">
-                                        Project Mgrs.
-                                    </a>
-                                </div>
-                                <a class="nav-link text-white" href="@Url.Action("Index","Tickets")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">
-                                    Developers
-                                </a>
-                                <a class="nav-link text-white" href="@Url.Action("Index","Tickets")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">
-                                    Submitters
-                                </a>
-                            </nav>
+                        <a class="mb-5" id="homePageLeftColumnDashboardLink" href="@Url.Action("Index","Home")"><i class="fas fa-tachometer-alt" id="faTachometer"></i>Dashboard</a>
+                        <!--added here begins-->
+
+                        <a class="nav-link collapsed text-decoration-none text-white" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="true"  aria-controls="collapseLayouts">
+
+
+
+<div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            Quick Access
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse show" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                            <!--added here ends-->
+
+
+                            <div>
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <div>
+                                        <ul class="text-white">
+                                            <span class="h4 textDecorationUnderline">Admin</span>
+                                            <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Create","Projects")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;Create a Project</a></li>
+                                            <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Create","Tickets")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;Create a Ticket</a></li>
+                                            <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Manageroles","Assignments")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;Assign Users</a></li>
+                                        </ul>                                        
+                                    </div>
+                                    <div>
+                                        <ul class="text-white">
+                                            <span class="h4 textDecorationUnderline">Project Mgr.</span>
+                                            <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Create","Projects")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;Create a Project</a></li>
+                                            <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Index","Tickets")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;Edit a Ticket</a></li>
+                                            <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Manageroles","Assignments")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;Assign Users</a></li>
+                                        </ul>
+                                    </div>
+                                    <ul class="text-white">
+                                        <span class="h4 textDecorationUnderline">Developers</span>
+                                        <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Index","Projects")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;View Projects</a></li>
+                                        <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Index","Tickets")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;View Tickets</a></li>
+                                    </ul>
+                                    <ul class="text-white">
+                                        <span class="h4 textDecorationUnderline">Submitters</span>
+                                        <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Create","Tickets")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;Create a Ticket</a></li>
+                                        <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Index","Tickets")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;View Tickets</a></li>
+                                        <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Index","Projects")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;View Projects</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+
+                            @*<a class="nav-link text-white" href="#">
+                <div class="sb-nav-link-icon"><i class="fas fa-chart-area text-white"></i></div>
+                Charts
+            </a>
+            <a class="nav-link text-white" href="#">
+                <div class="sb-nav-link-icon"><i class="fas fa-table text-white"></i></div>
+                Tables
+            </a>*@
                         </div>
-                     
-                        <a class="nav-link text-white" href="#">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area text-white"></i></div>
-                            Charts
-                        </a>
-                        <a class="nav-link text-white" href="#">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table text-white"></i></div>
-                            Tables
-                        </a>
-                    </div>
-                    <div class="h5 text-white" id="sideNavLoggedInRole">Logged in as role: @ViewBag.Role</div>
+                        <div class="h5 text-white" id="sideNavLoggedInRole">Logged in as role: @ViewBag.Role</div>
 
-                    <!--Show this if user is logged in (authenticated)-->
-                    @if (Request.IsAuthenticated)
-                    {
-                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "sideLogoutForm", @class = "navbar-left" }))
+                        <!--Show this if user is logged in (authenticated)-->
+                        @if (Request.IsAuthenticated)
                         {
-                            @Html.AntiForgeryToken()
-                            <a class="h5 text-white navbar-left" href="javascript:document.getElementById('sideLogoutForm').submit()">Log off<i class="fas fa-sign-out-alt text-white mt-3" id="sideLogoffArrow"></i></a>
+                            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "sideLogoutForm", @class = "navbar-left" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <a class="h5 text-white navbar-left" href="javascript:document.getElementById('sideLogoutForm').submit()">Log off<i class="fas fa-sign-out-alt text-white mt-3" id="sideLogoffArrow"></i></a>
+                            }
                         }
-                    }
 
-                </div>
+                    </div>
 
                 <!--logoff goes here-->
             </nav>
         </div>
-
+       
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid">
@@ -218,14 +249,14 @@
                             <div class="card backgroundYellow text-white mb-4">
                                 <div class="h3 card-body backgroundYellow text-uppercase">Submitters</div>
                                 <div class="d-flex align-items-center justify-content-between backgroundYellow">
-                                    <a class="small text-white stretched-link" href="@Url.Action("Index","Projects")"><h5><ul><li>View your assigned Projects</li><li>View and edit your assigned Tickets</li></ul></h5></a>
+                                    <a class="small text-white stretched-link" href="@Url.Action("Index","Projects")"><h5><ul><li>View your assigned Projects and Tickets</li><li>Create a Ticket</li></ul></h5></a>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    @RenderBody()
                     
+                    @RenderBody()
+
                     <!--MY CHART BEGINS-->
 
                     <canvas id="myChart"> </canvas>

@@ -21,7 +21,8 @@
         e.preventDefault();
         $("body").toggleClass("sb-sidenav-toggled");
     });
-
+       
+       
     /*Sweet Alert Register Page
         $("#registerButton").on("click", function (e) {
             e.preventDefault();

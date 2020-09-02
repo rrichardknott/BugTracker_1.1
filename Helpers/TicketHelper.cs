@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
+using Microsoft.Ajax.Utilities;
 
 namespace BugTracker_1._1.Helpers
 {
@@ -63,8 +64,9 @@ namespace BugTracker_1._1.Helpers
         public async Task ManageTicketNotifications(Ticket oldTicket, Ticket newTicket)
         {
             //Scenario 1:  Reassignment - Old ticket was assigned to one developer and is now assigned to another  developer
-            if ((oldTicket.DeveloperId != "" && (newTicket.DeveloperId != "")) && (oldTicket.DeveloperId != newTicket.DeveloperId))
-            {
+            if ((!oldTicket.DeveloperId.IsNullOrWhiteSpace() && (!newTicket.DeveloperId.IsNullOrWhiteSpace())) && (oldTicket.DeveloperId != newTicket.DeveloperId))
+
+                           {
                 var newTicketNotificationToNewDeveloper = new TicketNotification()
                 {
                     TicketId = newTicket.Id,
@@ -75,8 +77,10 @@ namespace BugTracker_1._1.Helpers
                 };
                 db.TicketNotifications.Add(newTicketNotificationToNewDeveloper);
                 db.SaveChanges();
+                var userId = newTicketNotificationToNewDeveloper.UserId;
+                var userEmail = db.Users.Find(userId).Email;
                 
-                var userEmail = db.Users.Find(newTicketNotificationToNewDeveloper.UserId).Email;
+                //var userEmail = db.Users.Find(newTicketNotificationToNewDeveloper.UserId).Email;
                 try
                 {
                     var email = new MailMessage(from, userEmail)
@@ -105,8 +109,9 @@ namespace BugTracker_1._1.Helpers
                 };
                 db.TicketNotifications.Add(newTicketNotificationToOldDeveloper);
                 db.SaveChanges();
-
-                userEmail = db.Users.Find(newTicketNotificationToOldDeveloper.UserId).Email;
+                userId = newTicketNotificationToOldDeveloper.UserId;
+                userEmail = db.Users.Find(userId).Email;
+                //userEmail = db.Users.Find(newTicketNotificationToOldDeveloper.UserId).Email;
                 try
                 {
                     var email = new MailMessage(from, userEmail)
@@ -129,7 +134,7 @@ namespace BugTracker_1._1.Helpers
             }
 
             //Scenario 2:  Assignment to Unassignment - Old Ticket was assigned and has now been Unassigned from developer
-            if ((oldTicket.DeveloperId != "") && (newTicket.DeveloperId == ""))
+            if ((!oldTicket.DeveloperId.IsNullOrWhiteSpace()) && (newTicket.DeveloperId.IsNullOrWhiteSpace()))
             {
                 var newTicketNotification = new TicketNotification
                 {
@@ -141,8 +146,10 @@ namespace BugTracker_1._1.Helpers
                 };
                 db.TicketNotifications.Add(newTicketNotification);
                 db.SaveChanges();// added 8/31/2020
+                var userId = newTicketNotification.UserId;
+                var userEmail = db.Users.Find(userId).Email;
 
-                var userEmail = db.Users.Find(newTicketNotification.UserId).Email;
+                //var userEmail = db.Users.Find(newTicketNotification.UserId).Email;
                 try
                 {
 
@@ -166,7 +173,7 @@ namespace BugTracker_1._1.Helpers
 
 
             //Scenario 3:  Unassignment to Assignment - Old ticket was not assigned and is now assigned to developer
-            if (oldTicket.DeveloperId == "" && newTicket.DeveloperId != "")
+            if (oldTicket.DeveloperId.IsNullOrWhiteSpace() && !newTicket.DeveloperId.IsNullOrWhiteSpace())
             {
 
                 var newNotification = new TicketNotification()
@@ -181,8 +188,10 @@ namespace BugTracker_1._1.Helpers
 
                 db.TicketNotifications.Add(newNotification);
                 db.SaveChanges();// added 8/31/2020
+                var userId = newNotification.UserId;
+                var userEmail = db.Users.Find(userId).Email;
 
-                var userEmail = db.Users.Find(newNotification.UserId).Email;
+                //var userEmail = db.Users.Find(newNotification.UserId).Email;
                 try
                 {
                     var email = new MailMessage(from, userEmail)

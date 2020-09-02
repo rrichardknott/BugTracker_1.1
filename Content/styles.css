@@ -10956,6 +10956,18 @@ a{
     color: darkred;
 }
 
+.colorGoldenRod{
+    color: goldenrod;
+}
+
+.colorGreen{
+    color: green;
+}
+
+.colorDarkGreen{
+    color: darkgreen;
+}
+
 table {
     border: 1px solid black !important;
 }
@@ -11022,6 +11034,14 @@ th, td{
 
 .width-100 {
     width: 100%;
+}
+
+.listStyleTypeNone {
+    list-style-type: none;
+}
+
+.textDecorationUnderline{
+    text-decoration: underline;
 }
 
 
@@ -11288,12 +11308,23 @@ button #demoLoginAdmin {
     background-color: #f5f5f5;
 }
 
+#_layoutQuickAccessLink{
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.brandTitle {
+    font-weight: 500;
+    font-family: 'Bilbo Swash Caps', cursive;
+    margin-right: 2%;    
+    letter-spacing: 5px;
+}
 
 
 /*Home/Index Page*/
 #logoutForm {
     position: relative;
-    left: 40%;
+    left: 62%;
 }
 
 #logoutForm a{
@@ -11341,12 +11372,14 @@ button #demoLoginAdmin {
 }
 
 #topNavUL{
-    display: inline-block;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 
 #fullEmail {
-    position: relative;
-    right: 150%;
+    
+    
 }
 
 #faTachometer{
@@ -11488,8 +11521,22 @@ button #demoLoginAdmin {
 
 
 /*Tickets Create*/
+
+#createTicketForm{
+    display: flex;    
+    width: 99%;
+    border: 1px solid black;
+    padding-top: 2%;
+    margin-bottom: 2%;
+}
+
+
+#createTicketContainerLeftColumn, #createTicketContainerRightColumn{
+    width: 100%;
+}
+
 #ticketBackButton, #createTicketButton {
-    width: 7%;
+    width: 12%;
     margin-bottom: 2%;
 }
 

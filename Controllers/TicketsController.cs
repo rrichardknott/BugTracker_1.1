@@ -120,6 +120,7 @@ namespace BugTracker_1._1.Controllers
         [Authorize(Roles = "Submitter, Admin")]
         public ActionResult Create()
         {
+            Ticket userModel = new Ticket();
             var userId = User.Identity.GetUserId();        
             if (userId == null)
             {
@@ -130,7 +131,7 @@ namespace BugTracker_1._1.Controllers
             ViewBag.TicketPriorityId = new SelectList(db.TicketPriorities, "Id", "Name");
             ViewBag.TicketTypeId = new SelectList(db.TicketTypes, "Id", "Name");
             ViewBag.TicketStatusId = new SelectList(db.TicketStatuses, "Id", "Name");
-            return View();
+            return View(userModel);
         }
 
         // POST: Tickets/Create
@@ -150,7 +151,7 @@ namespace BugTracker_1._1.Controllers
                 ticket.Created = DateTime.Now;
                 ticket.SubmitterId = userId;
                 db.Tickets.Add(ticket);
-                db.SaveChanges();
+                db.SaveChanges();                
                 return RedirectToAction("Index");
             }
 
