@@ -12,6 +12,8 @@ using BugTracker_1._1.Models;
 using System.Net.Mail;
 using System.Configuration;
 using System.Web.Configuration;
+using BugTracker_1._1.Helpers;
+using System.IO;
 
 namespace BugTracker_1._1.Controllers
 {
@@ -19,10 +21,11 @@ namespace BugTracker_1._1.Controllers
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
+        private ApplicationUserManager _userManager;       
 
         public AccountController()
         {
+
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -177,7 +180,7 @@ namespace BugTracker_1._1.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            var userModel = new RegisterViewModel();
+            var userModel = new ExtendedRegisterViewModel();
             return View(userModel);
         }
 
@@ -186,50 +189,134 @@ namespace BugTracker_1._1.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(ExtendedRegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code }, protocol: Request.Url.Scheme);
                     try
                     {
-                        var from = "Password confirmation";
+                        var from = "Richlylynn Bug Tracker Admin<admin@richlynnbugtracker.com>";
                         var email = new MailMessage(from, model.Email)
                         {
                             Subject = "Confirm your email.",
-                            Body = "Please confirm your account by clicking < a href =\"" + callbackUrl + "\">here</a>",
+                            Body = $"Hello {model.FullName}, please click <a href =\"" + callbackUrl + "\">here</a> to confirm your email address and complete your registration." ,
                             IsBodyHtml = true
                         };
                         var svc = new EmailService();
                         await svc.SendAsync(email);
+                        
 
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine(ex.Message);
                         await Task.FromResult(0);
-                    }                
+                    }
 
 
                     await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Login", "Account");
                 }
                 AddErrors(result);
+                
             }
 
             // If we got this far, something failed, redisplay form
+            
             return View(model);
         }
+        //================================Extended Register ViewModel===========================================///
+        //
+        // POST: /Account/Register
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> Register(ExtendedRegisterViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (FileUploadValidator.IsWebFriendlyImage(model.Avatar))
+        //        {
+        //            var user = new ApplicationUser
+        //        {
+        //            FirstName = model.FirstName,
+        //            LastName = model.LastName,
+        //            UserName = model.Email,
+        //            Email = model.Email,
+        //            AvatarPath = WebConfigurationManager.AppSettings["DefaultAvatarPath"]
+        //        };
+        //            if (model.Avatar != null)
+        //            {
+        //                var fileName = Path.GetFileName(model.Avatar.FileName);
+        //                fileName = FileStamp.MakeUnique(fileName);
+        //                model.Avatar.SaveAs(Path.Combine(Server.MapPath("~/Avatars/"), fileName));
+        //                user.AvatarPath = "/Avatars/" + fileName;
+        //            }
+        //            var result = await UserManager.CreateAsync(user, model.Password);
+        //        if (result.Succeeded)
+        //        {
+
+        //            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+        //            // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+        //            // Send an email with this link
+        //            string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+        //            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code }, protocol: Request.Url.Scheme);
+        //            try
+        //            {
+        //                var from = "Password confirmation";
+        //                var email = new MailMessage(from, model.Email)
+        //                {
+        //                    Subject = "Confirm your email.",
+        //                    Body = "Please confirm your account by clicking < a href =\"" + callbackUrl + "\">here</a>",
+        //                    IsBodyHtml = true
+        //                };
+        //                var svc = new EmailService();
+        //                await svc.SendAsync(email);
+
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                Console.WriteLine(ex.Message);
+        //                await Task.FromResult(0);
+        //            }
+        //            //try
+        //            //{
+        //            //    var from = "$$averAdmin@fp.com>";
+        //            //    var email = new MailMessage(from, model.Email)
+        //            //    {
+        //            //        Subject = "Confirm your Account",
+        //            //        Body = "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>",
+        //            //        IsBodyHtml = true
+        //            //    };
+        //            //    var svc = new EmailService();
+        //            //    await svc.SendAsync(email);
+        //            //}
+        //            //catch (Exception ex)
+        //            //{
+        //            //    Console.WriteLine(ex.Message);
+        //            //    await Task.FromResult(0);
+        //            //}
+        //            return RedirectToAction("Index", "Home");
+        //            }
+        //            AddErrors(result);
+        //        }
+        //    }
+        //    // If we got this far, something failed, redisplay form
+        //    return View(model);
+        //}
+
+        ////=======================================================================================================//
 
         //
         // GET: /Account/ConfirmEmail

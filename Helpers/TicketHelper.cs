@@ -16,7 +16,17 @@ namespace BugTracker_1._1.Helpers
         private ApplicationDbContext db = new ApplicationDbContext();
         EmailService svc = new EmailService();
         readonly string from = "Richlynn Bug Tracker<richlynnbugtracker@mailinator.com>";
-        
+
+
+        public List<Ticket> GetProjectTickets()
+        {
+            var userId = HttpContext.Current.User.Identity.GetUserId();
+            var user = db.Users.Find(userId);
+            var ticketList = new List<Ticket>();
+            ticketList = user.Projects.SelectMany(p => p.Tickets).ToList();
+            return ticketList;
+        }
+
         public int TotalNumberOfTickets()
         {
             var currentNumberOfTickets = db.Tickets.Count();
@@ -41,7 +51,7 @@ namespace BugTracker_1._1.Helpers
             {
                 case "Admin":
                     return true;
-                case "ProjectManager":
+                case "Project Manager":
                     var user = db.Users.Find(userId);
                     return user.Projects.SelectMany(p => p.Tickets).Any(t => t.Id == ticketId);
                 case "Developer":

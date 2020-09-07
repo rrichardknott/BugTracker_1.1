@@ -98,7 +98,7 @@
                     @Html.DisplayFor(model => model.Updated)
                 </td>
                 <td id="ticketEditIsResolved">
-                    @Html.DisplayFor(model => model.IsResloved)
+                    @Html.DisplayFor(model => model.IsResolved)
                 </td>
                 <td id="ticketEditIsArchived">
                     @Html.DisplayFor(model => model.IsArchived)
@@ -116,55 +116,55 @@
         <h2 class="font-weight-bold colorBlack pt-3" id="ticketDetailsCommentsH2">Comments</h2>
         <h2 class="font-weight-bold colorBlack pt-3" id="ticketDetailsAttachmentsH2">Attachments</h2>
         <div class="row" id="ticketDetailsCommentsAndAttachmentsRowContainer">
-            <div class="col-6 p-0" id="ticketDetailsCommentsColumnContainer">
+            <div class="col-6 p-0 table-responsive" id="ticketDetailsCommentsColumnContainer">
 
                 @if (Model.Comments.Count != 0)
                 {
-                    <table class="table">
-                        <thead>
+                <table class="table table-bordered border-bold" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                Submitter
+                            </th>
+                            <th>
+                                Comment Description
+                            </th>
+                            <th>
+                                Created
+                            </th>
+                            @if (User.IsInRole("Admin") || User.IsInRole("Project Manager"))
+                            {
+                                <th></th>
+                            }
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model.Comments)
+                        {
                             <tr>
-                                <th>
-                                    Submitter
-                                </th>
-                                <th>
-                                    Comment Description
-                                </th>
-                                <th>
-                                    Created
-                                </th>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.User.FullName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Comment)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Created)
+                                </td>
                                 @if (User.IsInRole("Admin") || User.IsInRole("Project Manager"))
                                 {
-                                    <th></th>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                    </td>
                                 }
 
                             </tr>
-                        </thead>
-                        <tbody>
-
-                            @foreach (var item in Model.Comments)
-                            {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.User.FullName)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Comment)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Created)
-                                    </td>
-                                    @if (User.IsInRole("Admin") || User.IsInRole("Project Manager"))
-                                    {
-                                        <td>
-                                            @Html.ActionLink("Edit", "Edit", new { id = item.Id })
-                                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                                        </td>
-                                    }
-
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+                        }
+                    </tbody>
+                </table>
 
                 }
                 else
@@ -200,48 +200,48 @@
 
             </div>
 
-            <div class="col-6 p-0">
+            <div class="col-6 p-0 table-responsive">
                 @if (ticketHelper.CanMakeComment(Model.Id))
                 {
-                    <table class="table">
-                        <thead>
-                            <tr id="ticketAttachmentsTableRowHeading">
-                                <th>
-                                    @Html.DisplayName("Icon")
-                                </th>
-                                <th>
-                                    @Html.DisplayName("Name")
-                                </th>
-                                <th>
-                                    @Html.DisplayName("Description")
-                                </th>
-                                <th>
-                                    @Html.DisplayName("File Path")
-                                </th>
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr id="ticketAttachmentsTableRowHeading">
+                            <th>
+                                @Html.DisplayName("Icon")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Name")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Description")
+                            </th>
+                            <th>
+                                @Html.DisplayName("File Path")
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var attachment in Model.Attachments.ToList())
+                        {
+                            <tr>
+                                <td>
+                                    🟢
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => attachment.FileName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => attachment.Description)
+                                </td>
+                                <td>
+                                    <a target="_blank" href="@attachment.FilePath">@attachment.FilePath</a>
+                                </td>
                             </tr>
-                        </thead>
+                        }
+                    </tbody>
 
-                        <tbody>
-                            @foreach (var attachment in Model.Attachments.ToList())
-                            {
-                                <tr>
-                                    <td>
-                                        🟢
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => attachment.FileName)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => attachment.Description)
-                                    </td>
-                                    <td>
-                                        <a target="_blank" href="@attachment.FilePath">@attachment.FilePath</a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-
-                    </table>
+                </table>
 
                     using (Html.BeginForm("Create", "TicketAttachments", FormMethod.Post, new { enctype = "multipart/form-data" }))
                     {
@@ -281,9 +281,13 @@
         </div>
         <!--=======================================================================-->
         <h3 class="font-weight-bold mt-3">Ticket History</h3>
-        <div class="row p-0" id="ticketHistoryRowContainer">
-            <div class="col p-0">
-                <table id="myTable" class="table m-0 width-100">
+        <div class="row p-0 table-responsive" id="ticketHistoryRowContainer">
+            @*<div class="col p-0">*@
+                @if (Model.Histories.Count != 0)
+                {
+
+
+                <table class="table " id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>
@@ -329,9 +333,97 @@
                     </tbody>
 
                 </table>
-            </div>
+                }
+                else
+                {
+            <div class="text-center">
+                <h4 class="font-weight-bold p-3">No history to display.</h4>
+            </div>  
+                }
+            <!--</div><!---->
 
         </div>
+
+        <h3 class="font-weight-bold mt-3">Your Tickets:</h3>
+        <div class="table-responsive">
+            <table class="table table-bordered border-bold" id="dataTable5" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            Project
+                        </th>
+                        <th>
+                            Type
+                        </th>
+                        <th>
+                            Priority
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            Issue
+                        </th>
+                        <th>
+                            Created
+                        </th>
+                        <th>
+                            Updated
+                        </th>
+                        <th>
+                            Resolved
+                        </th>
+                        <th>
+                            Archived
+                        </th>
+                        <th></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ticketHelper.GetProjectTickets())
+                    {
+                        <tr>
+                            <td style="">
+                                @item.Project.Name
+                            </td>
+                            <td>
+                                @item.TicketType.Name
+                            </td>
+                            <td>
+                                @item.TicketPriority.Name
+                            </td>
+                            <td>
+                                @item.TicketStatus.Name
+                            </td>
+                            <td>
+                                @item.Issue
+                            </td>
+                            <td>
+                                @item.Created
+                            </td>
+                            <td>
+                                @item.Updated
+                            </td>
+                            <td>
+                                @item.IsResolved
+                            </td>
+                            <td>
+                                @item.IsArchived
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                @Html.ActionLink("Details", "Dashboard", new { id = item.Id })
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+
 
     </div>
 

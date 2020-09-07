@@ -1,4 +1,4 @@
-﻿@model BugTracker_1._1.Models.RegisterViewModel
+﻿@model BugTracker_1._1.Models.ExtendedRegisterViewModel
 @{
     ViewBag.Title = "";
     Layout = null;
@@ -42,7 +42,7 @@
                                 <div class="p-5">
                                     <div class="text-center">
 
-                                        <h1 class="h4 mb-4">Welcome To The<br/> Richlynn Bug Tracker!</h1>
+                                        <h1 class="h4 mb-4">Welcome To The<br /> Richlynn Bug Tracker!</h1>
                                     </div>
 
                                     <h2>@ViewBag.Title</h2>
@@ -50,23 +50,33 @@
                                     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                                     {
                                         @Html.AntiForgeryToken()
-                                        <h4  class="colorBrightRed font-weight-bold">Create a new account.</h4>
+                                        <h4 class="colorBrightRed font-weight-bold">Create a new account.</h4>
                                         <hr />
-                                        @Html.ValidationSummary("", new { @class = "text-danger" })                          
-                                        
-                                        <div class="form-group">                        
+                                        @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                                        <div class="form-group">
                                             <div class="col-md-12">
-                                                @Html.TextBoxFor(m => m.Email, new { @placeholder = "Email", @maxlength = "50" , @class = "form-control form-control-user", @id="registerEmailTextBox" })
+                                                @Html.TextBoxFor(m => m.Email, new { @placeholder = "Email", @maxlength = "50", @class = "form-control form-control-user", id = "registerEmailTextBox" })
                                             </div>
                                         </div>
-                                        <div class="form-group">                          
+                                        <div class="form-group">
                                             <div class="col-md-12">
-                                                @Html.PasswordFor(m => m.Password, new { @placeholder = "Password", @maxlength = "50", @class = "form-control form-control-user", @id="registerPasswordTextBox" })
+                                                @Html.TextBoxFor(m => m.FirstName, new { @placeholder = "First Name", @maxlength = "50", @class = "form-control form-control-user", id = "registerFirstNameTextBox" })
                                             </div>
                                         </div>
-                                        <div class="form-group">                          
+                                        <div class="form-group">
                                             <div class="col-md-12">
-                                                @Html.PasswordFor(m => m.ConfirmPassword, new { @placeholder="Confirm password", @maxlength = "50", @class = "form-control form-control-user", @id="confirmRegisterPasswordTextBox" })
+                                                @Html.TextBoxFor(m => m.LastName, new { @placeholder = "Last Name", @maxlength = "50", @class = "form-control form-control-user", id = "registerLastNameTextBox" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                @Html.PasswordFor(m => m.Password, new { @placeholder = "Password", @maxlength = "50", @class = "form-control form-control-user", id = "registerPasswordTextBox" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                @Html.PasswordFor(m => m.ConfirmPassword, new { @placeholder = "Confirm password", @maxlength = "50", @class = "form-control form-control-user", id = "confirmRegisterPasswordTextBox" })
                                             </div>
                                         </div>
                                         <div class="form-group">

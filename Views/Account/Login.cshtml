@@ -2,6 +2,7 @@
 @model LoginViewModel
 
 @{
+    
     ViewBag.Title = "Log In";
     Layout = null;
 }
@@ -87,16 +88,16 @@
 
                                             <hr>
                                             <div id="loginForgotPasswordAndDemoLinksUL">
-                                                
-                                                    @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "loginRegisterLink" }) &nbsp;| 
-                                                    @Html.ActionLink("Forgot password?", "ForgotPassword", "Account", routeValues: null, htmlAttributes: new { id = "forgotPasswordLink" })
+
+                                                @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "loginRegisterLink" }) &nbsp;|
+                                                @Html.ActionLink("Forgot password?", "ForgotPassword", "Account", routeValues: null, htmlAttributes: new { id = "forgotPasswordLink" })
 
 
-                                                    @*<li>@Html.ActionLink("Resend Email Confirmation", "ResendEmailConfirmation", "Account", routeValues: null, htmlAttributes: new { id = "resendEmailConfirmationLink" })</li>*@
+                                                @*<li>@Html.ActionLink("Resend Email Confirmation", "ResendEmailConfirmation", "Account", routeValues: null, htmlAttributes: new { id = "resendEmailConfirmationLink" })</li>*@
                                             </div>
-                                            @Html.ActionLink("Log in as a Demo user", "DemoLogin", "Account", routeValues: null, htmlAttributes: new { id = "demoLoginLink" })                                            
+                                            @Html.ActionLink("Log in as a Demo user", "DemoLogin", "Account", routeValues: null, htmlAttributes: new { id = "demoLoginLink" })
                                         }
-
+                                        
 
                                         <hr />
                                         <!--Third party logins-->
@@ -109,7 +110,7 @@
             <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
         </a>*@
                                     </section>
-                                   
+
                                 </div>
                             </div>
                         </div>
@@ -122,15 +123,18 @@
 
     </div>
 
+  
+
+
     <!-- Bootstrap core JavaScript-->
-    <script src="~/Scripts/jquery.js"></link>
+    <script src="~/Scripts/jquery.js"></script>
+
     @*<script src="~/Scripts/bootstrap.bundle.min.js"></script>*@
 
-    <!-- Core plugin JavaScript-->
+    <!--Core plugin JavaScript-->
     <script src="~/Scripts/bootstrap.bundle.js"></script>
+    <script src="//unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    @*<script src="~/Scripts/sb-admin-2.js"></script>*@
 
 </body>
 

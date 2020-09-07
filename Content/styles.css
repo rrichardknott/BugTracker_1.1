@@ -2267,6 +2267,7 @@ textarea.form-control {
     position: absolute;
     top: 100%;
     z-index: 5;
+
     display: none;
     max-width: 100%;
     padding: 0.25rem 0.5rem;
@@ -10900,6 +10901,10 @@ body {
 
 /*=====================================MY STYLES=======================================*/
 
+.applyFlexBox{
+    display: flex;
+}
+
 a{
     text-decoration: none!important;
 }
@@ -11061,7 +11066,7 @@ body{
     border-radius: 1%;
 }
 
-#forgotPasswordTextBox, #registerEmailTextBox, #registerPasswordTextBox, #confirmRegisterPasswordTextBox, #loginEmailTextBox, #loginPasswordTextBox, #loginButton {
+#forgotPasswordTextBox, #registerEmailTextBox, #registerFirstNameTextBox, #registerLastNameTextBox, #registerPasswordTextBox, #confirmRegisterPasswordTextBox, #loginEmailTextBox, #loginPasswordTextBox, #loginButton {
     border-radius: 10rem;
     padding: 0.75rem 1rem;
     position: relative;
@@ -11181,27 +11186,22 @@ body{
 
 [data-tooltip]::after {
     position: absolute;
-    width: 250px;
+    width: 300px;
     left: calc(50% - 125px);
-    bottom: 150%;
+    bottom: 100px;
     text-align: center;
     box-sizing: border-box;
-
-
-
     content:attr(data-tooltip);
-    color: white;
-    background: #303030;
+    background: white;
+    color: #303030;
     padding: 12px;
     border-radius: 10px;
     font-size: 0.9em;
-    
-
-
     visibility: hidden;
     opacity: 0;
     transform: translateY(10px);
     transition: opacity 0.3s, transform, 0.2s;
+    z-index: 99;
 
 }
 
@@ -11378,7 +11378,8 @@ button #demoLoginAdmin {
 }
 
 #fullEmail {
-    
+    position: relative;
+    right: 50%;
     
 }
 
@@ -11568,6 +11569,7 @@ button #demoLoginAdmin {
 
 #ticketDetailsCommentsColumnContainer {
     border-right: 1px solid black;
+    
     position: relative;
 }
 
@@ -11587,6 +11589,11 @@ button #demoLoginAdmin {
     display: inline-block;
     width: 20%;
 }
+#ticketAttachmentsTableRowHeading{
+    border-top: none;
+    border-left: none
+}
+
 
 #ticketCommentForm {
     position: absolute;

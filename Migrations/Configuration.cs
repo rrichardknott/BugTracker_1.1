@@ -1,4 +1,6 @@
-namespace BugTracker_1._1.Migrations{
+namespace BugTracker_1._1.Migrations
+{
+
     using BugTracker_1._1.Models;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
@@ -14,8 +16,8 @@ namespace BugTracker_1._1.Migrations{
     using System.Collections.Generic;
 
     internal sealed class Configuration : DbMigrationsConfiguration<BugTracker_1._1.Models.ApplicationDbContext>
-    {       
-        
+    {
+
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
@@ -24,11 +26,11 @@ namespace BugTracker_1._1.Migrations{
         protected override void Seed(BugTracker_1._1.Models.ApplicationDbContext context)
         {
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));    
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var userRolesHelper = new UserRolesHelper();
             var projectHelper = new ProjectHelper();
             var random = new Random();
-           
+
             List<Ticket> ticketList = new List<Ticket>();
             List<ApplicationUser> projectManagers = new List<ApplicationUser>();
             List<ApplicationUser> developers = new List<ApplicationUser>();
@@ -62,284 +64,223 @@ namespace BugTracker_1._1.Migrations{
             if (!context.Roles.Any(r => r.Name == "Developer"))
             {
                 roleManager.Create(new IdentityRole { Name = "Developer" });
-            }            
+            }
 
-            var DemoAdminPassword = WebConfigurationManager.AppSettings["DemoAdminPassword"];
+            var RichardKnottEmail = WebConfigurationManager.AppSettings["RichardKnottEmail"];
+            var RichardKnottPassword = WebConfigurationManager.AppSettings["RichardKnottPassword"];
+            var AmyAdamsEmail = WebConfigurationManager.AppSettings["AmyAdamsEmail"];
+            var AmyAdamsPassword = WebConfigurationManager.AppSettings["AmyAdamsPassword"];
+            var BenjaminBrattEmail = WebConfigurationManager.AppSettings["BenjaminBrattEmail"];
+            var BenjaminBrattPassword = WebConfigurationManager.AppSettings["BenjaminBrattPassword"];
+            var CourtneyCoxEmail = WebConfigurationManager.AppSettings["CourtneyCoxEmail"];
+            var CourtneyCoxPassword = WebConfigurationManager.AppSettings["CourtneyCoxPassword"];
+            var DavidDuchovnyEmail = WebConfigurationManager.AppSettings["DavidDuchovnyEmail"];
+            var DavidDuchovnyPassword = WebConfigurationManager.AppSettings["DavidDuchovnyPassword"];
+            var EmilioEstevezEmail = WebConfigurationManager.AppSettings["EmilioEstevezEmail"];
+            var EmilioEstevezPassword = WebConfigurationManager.AppSettings["EmilioEstevezPassword"];
+            var FreddieFenderEmail = WebConfigurationManager.AppSettings["FreddieFenderEmail"];
+            var FreddieFenderPassword = WebConfigurationManager.AppSettings["FreddieFenderPassword"];
+            var GaryGulmanEmail = WebConfigurationManager.AppSettings["GaryGulmanEmail"];
+            var GaryGulmanPassword = WebConfigurationManager.AppSettings["GaryGulmanPassword"];
+            var HarryHamlinEmail = WebConfigurationManager.AppSettings["HarryHamlinEmail"];
+            var HarryHamlinPassword = WebConfigurationManager.AppSettings["HarryHamlinPassword"];
+            var AlanAldaEmail = WebConfigurationManager.AppSettings["AlanAldaEmail"];
+            var AlanAldaPassword = WebConfigurationManager.AppSettings["AlanAldaPassword"];
+            var BenjaminButtonEmail = WebConfigurationManager.AppSettings["BenjaminButtonEmail"];
+            var BenjaminButtonPassword = WebConfigurationManager.AppSettings["BenjaminButtonPassword"];
+            var ChevyChaseEmail = WebConfigurationManager.AppSettings["ChevyChaseEmail"];
+            var ChevyChasePassword = WebConfigurationManager.AppSettings["ChevyChasePassword"];
+            var DannyDeVitoEmail = WebConfigurationManager.AppSettings["DannyDeVitoEmail"];
+            var DannyDeVitoPassword = WebConfigurationManager.AppSettings["DannyDeVitoPassword"];
 
-            var DemoProjectManagerPassword = WebConfigurationManager.AppSettings["DemoProjectManagerPassword"];
-            var DemoProjectManagerPassword1 = WebConfigurationManager.AppSettings["DemoProjectManagerPassword1"];
 
 
-            var DemoDeveloperPassword = WebConfigurationManager.AppSettings["DemoDeveloperPassword"];
-            var DemoDeveloperPassword1 = WebConfigurationManager.AppSettings["DemoDeveloperPassword1"];
 
-
-            var DemoSubmitterPassword = WebConfigurationManager.AppSettings["DemoSubmitterPassword"];
-            var DemoSubmitterPassword1 = WebConfigurationManager.AppSettings["DemoSubmitterPassword1"];
-            var DemoSubmitterPassword2 = WebConfigurationManager.AppSettings["DemoSubmitterPassword2"];
-
-            var MyPassword = WebConfigurationManager.AppSettings["MyPassword"];
-            
-
-            //if (!context.Users.Any(u => u.Email == "RichardKnott1970@gmail.com"))
-            //{
-            //    userManager.Create(new ApplicationUser()
-            //    {
-            //        Email = "RichardKnott1970@gmail.com",
-            //        UserName = "RichardKnott1970@gmail.com",
-            //        FirstName = "Richard",
-            //        LastName = "Knott"
-            //    }, MyPassword);
-
-               
-            //    var userId = userManager.FindByEmail("Richardknott1970@gmail.com").Id;               
-            //    userManager.AddToRole(userId, "Admin");
-            //}
-            
-            //if (!context.Users.Any(u => u.Email == "pmjasontwichell@CoderFoundry.com"))
-            //{
-            //    userManager.Create(new ApplicationUser()
-            //    {
-            //        Email = "pmjasontwichell@CoderFoundry.com",
-            //        UserName = "pmjasontwichell@CoderFoundry.com",
-            //        FirstName = "Jason",
-            //        LastName = "Twichell",
-            //    }, "Abc@123!");
-
-                
-            //    var userId = userManager.FindByEmail("pmjasontwichell@CoderFoundry.com").Id;          
-            //    userManager.AddToRole(userId, "Project Manager");
-            //}
-
-            //if (!context.Users.Any(u => u.Email == "pmarussell@coderfoundry.com"))
-            //{
-            //    userManager.Create(new ApplicationUser()
-            //    {
-            //        Email = "pmarussell@coderfoundry.com",
-            //        UserName = "pmarussell@coderfoundry.com",
-            //        FirstName = "Drew",
-            //        LastName = "Russell",
-            //    }, "Abc@123!");
-
-                
-            //    var userId = userManager.FindByEmail("pmarussell@CoderFoundry.com").Id;               
-            //    userManager.AddToRole(userId, "Project Manager");
-            //}
-
-            //if (!context.Users.Any(u => u.Email == "projectmanager@mailinator.com"))
-            //{
-            //    userManager.Create(new ApplicationUser()
-            //    {
-            //        Email = "projectmanager@mailinator.com",
-            //        UserName = "projectmanager@mailinator.com",
-            //        FirstName = "Project",
-            //        LastName = "Manager",
-            //    }, "Abc@123!");
-            //    var userId = userManager.FindByEmail("projectmanager@mailinator.com").Id;
-            //    userManager.AddToRole(userId, "Project Manager");
-            //}
-
-            //if (!context.Users.Any(u => u.Email == "devjohndoe@mailinator.com"))
-            //{
-            //    userManager.Create(new ApplicationUser()
-            //    {
-            //        Email = "devjohndoe@mailinator.com",
-            //        UserName = "devjohndoe@mailinator.com",
-            //        FirstName = "John",
-            //        LastName = "Doe",
-            //    }, "Abc@123!");
-
-            //    //Get the ID that was just created by adding the above user
-            //    var userId = userManager.FindByEmail("devjohndoe@mailinator.com").Id;
-            //    //assign userId to a role
-            //    userManager.AddToRole(userId, "Developer");
-            //}
-
-            //if (!context.Users.Any(u => u.Email == "devjanedoe@mailinator.com"))
-            //{
-            //    userManager.Create(new ApplicationUser()
-            //    {
-            //        Email = "devjanedoe@mailinator.com",
-            //        UserName = "devjanedoe@mailinator.com",
-            //        FirstName = "Jane",
-            //        LastName = "Doe",
-            //    }, "Abc@123!");
-
-            //    //Get the ID that was just created by adding the above user
-            //    var userId = userManager.FindByEmail("devjanedoe@mailinator.com").Id;
-            //    //assign userId to a role
-            //    userManager.AddToRole(userId, "Developer");
-            //}           
-            
-            //if (!context.Users.Any(u => u.Email == "developer@mailinator.com"))
-            //{
-            //    userManager.Create(new ApplicationUser()
-            //    {
-            //        Email = "developer@mailinator.com",
-            //        UserName = "developer@mailinator.com",
-            //        FirstName = "Deve",
-            //        LastName = "Loper",
-            //    }, "password");
-                
-            //    var userId = userManager.FindByEmail("developer@mailinator.com").Id;                
-            //    userManager.AddToRole(userId, "Developer");
-            //}
-
-            //if (!context.Users.Any(u => u.Email == "submitter1@mailinator.com"))
-            //{
-            //    userManager.Create(new ApplicationUser()
-            //    {
-            //        Email = "submitter1@mailinator.com",
-            //        UserName = "submitter1@mailinator.com",
-            //        FirstName = "Sub",
-            //        LastName = "Mitter1",
-            //    }, "Abc@123!");
-            //    var userId = userManager.FindByEmail("submitter1@mailinator.com").Id;
-            //    userManager.AddToRole(userId, "Submitter");
-            //}
-
-            //if (!context.Users.Any(u => u.Email == "submitter2@mailinator.com"))
-            //{
-            //    userManager.Create(new ApplicationUser()
-            //    {
-            //        Email = "submitter2@mailinator.com",
-            //        UserName = "submitter2@mailinator.com",
-            //        FirstName = "Sub",
-            //        LastName = "Mitter2",
-            //    }, "Abc@123!");
-            //    var userId = userManager.FindByEmail("submitter2@mailinator.com").Id;
-            //    userManager.AddToRole(userId, "Submitter");
-            //}
-
-            //if (!context.Users.Any(u => u.Email == "submitter3@mailinator.com"))
-            //{
-            //    userManager.Create(new ApplicationUser()
-            //    {
-            //        Email = "submitter3@mailinator.com",
-            //        UserName = "submitter3@mailinator.com",
-            //        FirstName = "Sub",
-            //        LastName = "Mitter3",
-            //    }, "Abc@123!");
-            //    var userId = userManager.FindByEmail("submitter3@mailinator.com").Id;
-            //    userManager.AddToRole(userId, "Submitter");
-            //}
-
-            if (!context.Users.Any(u => u.Email == "DemoAdminEmail@mailinator.com"))
+            if (!context.Users.Any(u => u.Email == RichardKnottEmail))
             {
                 userManager.Create(new ApplicationUser()
                 {
-                    Email = "DemoAdminEmail@mailinator.com",
-                    UserName = "DemoAdminEmail@mailinator.com",
-                    FirstName = "Demo",
-                    LastName = "Admin"
-                }, DemoAdminPassword);
+                    Email = RichardKnottEmail,
+                    UserName = RichardKnottEmail,
+                    FirstName = "Richard",
+                    LastName = "Knott"
+                }, RichardKnottPassword);
 
-                
-                var userId = userManager.FindByEmail("DemoAdminEmail@mailinator.com").Id;             
+
+                var userId = userManager.FindByEmail(RichardKnottEmail).Id;
                 userManager.AddToRole(userId, "Admin");
             }
 
-            if (!context.Users.Any(u => u.Email == "DemoProjectManagerEmail@mailinator.com"))
+            if (!context.Users.Any(u => u.Email == AmyAdamsEmail))
             {
                 userManager.Create(new ApplicationUser()
                 {
-                    Email = "DemoProjectManagerEmail@mailinator.com",
-                    UserName = "DemoProjectManagerEmail@mailinator.com",
-                    FirstName = "Demo",
-                    LastName = "ProjectManager"
-                }, DemoProjectManagerPassword);
+                    Email = AmyAdamsEmail,
+                    UserName = AmyAdamsEmail,
+                    FirstName = "Amy",
+                    LastName = "Adams"
+                }, AmyAdamsPassword);
 
-                
-                var userId = userManager.FindByEmail("DemoProjectManagerEmail@mailinator.com").Id;    
+
+                var userId = userManager.FindByEmail(AmyAdamsEmail).Id;
+                userManager.AddToRole(userId, "Admin");
+            }
+
+            if (!context.Users.Any(u => u.Email == (BenjaminBrattEmail)))
+            {
+                userManager.Create(new ApplicationUser()
+                {
+                    Email = BenjaminBrattEmail,
+                    UserName = BenjaminBrattEmail,
+                    FirstName = "Benjamin",
+                    LastName = "Bratt"
+                }, BenjaminBrattPassword);
+
+
+                var userId = userManager.FindByEmail(BenjaminBrattEmail).Id;
                 userManager.AddToRole(userId, "Project Manager");
             }
 
-            if (!context.Users.Any(u => u.Email == "DemoProjectManagerEmail1@mailinator.com"))
+            if (!context.Users.Any(u => u.Email == CourtneyCoxEmail))
             {
                 userManager.Create(new ApplicationUser()
                 {
-                    Email = "DemoProjectManagerEmail1@mailinator.com",
-                    UserName = "DemoProjectManagerEmail1@mailinator.com",
-                    FirstName = "Demo",
-                    LastName = "ProjectManager1"
-                }, DemoProjectManagerPassword1);
+                    Email = CourtneyCoxEmail,
+                    UserName = CourtneyCoxEmail,
+                    FirstName = "Courtney",
+                    LastName = "Cox"
+                }, CourtneyCoxPassword);
 
-                
-                var userId = userManager.FindByEmail("DemoProjectManagerEmail1@mailinator.com").Id;
+
+                var userId = userManager.FindByEmail(CourtneyCoxEmail).Id;
                 userManager.AddToRole(userId, "Project Manager");
             }
 
-            if (!context.Users.Any(u => u.Email == "DemoDeveloperEmail@mailinator.com"))
+            if (!context.Users.Any(u => u.Email == DavidDuchovnyEmail))
             {
                 userManager.Create(new ApplicationUser()
                 {
-                    Email = "DemoDeveloperEmail@mailinator.com",
-                    UserName = "DemoDeveloperEmail@mailinator.com",
-                    FirstName = "Demo",
-                    LastName = "Developer"
-                }, DemoDeveloperPassword);
+                    Email = DavidDuchovnyEmail,
+                    UserName = DavidDuchovnyEmail,
+                    FirstName = "David",
+                    LastName = "Duchovny"
+                }, DavidDuchovnyPassword);
 
-                
-                var userId = userManager.FindByEmail("DemoDeveloperEmail@mailinator.com").Id;
+
+                var userId = userManager.FindByEmail(DavidDuchovnyEmail).Id;
                 userManager.AddToRole(userId, "Developer");
             }
 
-            if (!context.Users.Any(u => u.Email == "DemoDeveloperEmail1@mailinator.com"))
+            if (!context.Users.Any(u => u.Email == EmilioEstevezEmail))
             {
                 userManager.Create(new ApplicationUser()
                 {
-                    Email = "DemoDeveloperEmail1@mailinator.com",
-                    UserName = "DemoDeveloperEmail1@mailinator.com",
-                    FirstName = "Demo",
-                    LastName = "Developer1"
-                }, DemoDeveloperPassword1);
+                    Email = EmilioEstevezEmail,
+                    UserName = EmilioEstevezEmail,
+                    FirstName = "Emilio",
+                    LastName = "Estevez"
+                }, EmilioEstevezPassword);
 
-                
-                var userId = userManager.FindByEmail("DemoDeveloperEmail1@mailinator.com").Id;
+
+                var userId = userManager.FindByEmail(EmilioEstevezEmail).Id;
                 userManager.AddToRole(userId, "Developer");
             }
 
-            if (!context.Users.Any(u => u.Email == "DemoSubmitterEmail@mailinator.com"))
+            if (!context.Users.Any(u => u.Email == FreddieFenderEmail))
             {
                 userManager.Create(new ApplicationUser()
                 {
-                    Email = "DemoSubmitterEmail@mailinator.com",
-                    UserName = "DemoSubmitterEmail@mailinator.com",
-                    FirstName = "Demo",
-                    LastName = "Submitter"
-                }, DemoSubmitterPassword);
-                
-                var userId = userManager.FindByEmail("DemoSubmitterEmail@mailinator.com").Id;
+                    Email = FreddieFenderEmail,
+                    UserName = FreddieFenderEmail,
+                    FirstName = "Freddie",
+                    LastName = "Fender"
+                }, FreddieFenderPassword);
+
+                var userId = userManager.FindByEmail(FreddieFenderEmail).Id;
                 userManager.AddToRole(userId, "Submitter");
             }
 
-            if (!context.Users.Any(u => u.Email == "DemoSubmitterEmail1@mailinator.com"))
+            if (!context.Users.Any(u => u.Email == GaryGulmanEmail))
             {
                 userManager.Create(new ApplicationUser()
                 {
-                    Email = "DemoSubmitterEmail1@mailinator.com",
-                    UserName = "DemoSubmitterEmail1@mailinator.com",
-                    FirstName = "Demo",
-                    LastName = "Submitter1"
-                }, DemoSubmitterPassword1);
+                    Email = GaryGulmanEmail,
+                    UserName = GaryGulmanEmail,
+                    FirstName = "Gary",
+                    LastName = "Gulman"
+                }, GaryGulmanPassword);
 
-                
-                var userId = userManager.FindByEmail("DemoSubmitterEmail1@mailinator.com").Id;
+
+                var userId = userManager.FindByEmail(GaryGulmanEmail).Id;
                 userManager.AddToRole(userId, "Submitter");
             }
 
-            if (!context.Users.Any(u => u.Email == "DemoSubmitterEmail2@mailinator.com"))
+            if (!context.Users.Any(u => u.Email == HarryHamlinEmail))
             {
                 userManager.Create(new ApplicationUser()
                 {
-                    Email = "DemoSubmitterEmail2@mailinator.com",
-                    UserName = "DemoSubmitterEmail2@mailinator.com",
-                    FirstName = "Demo",
-                    LastName = "Submitter2"
-                }, DemoSubmitterPassword2);
+                    Email = HarryHamlinEmail,
+                    UserName = HarryHamlinEmail,
+                    FirstName = "Harry",
+                    LastName = "Hamlin"
+                }, HarryHamlinPassword);
 
 
-                var userId = userManager.FindByEmail("DemoSubmitterEmail2@mailinator.com").Id;
+                var userId = userManager.FindByEmail(HarryHamlinEmail).Id;
+                userManager.AddToRole(userId, "Submitter");
+            }
+
+
+            //For Demo Version
+            if (!context.Users.Any(u => u.Email == AlanAldaEmail))
+            {
+                userManager.Create(new ApplicationUser()
+                {
+                    Email = AlanAldaEmail,
+                    UserName = AlanAldaEmail,
+                    FirstName = "Alan",
+                    LastName = "Alda"
+                }, AlanAldaPassword);
+                var userId = userManager.FindByEmail(AlanAldaEmail).Id;
+                userManager.AddToRole(userId, "Admin");
+            }
+
+            if (!context.Users.Any(u => u.Email == BenjaminButtonEmail))
+            {
+                userManager.Create(new ApplicationUser()
+                {
+                    Email = BenjaminButtonEmail,
+                    UserName = BenjaminButtonEmail,
+                    FirstName = "Benjamin",
+                    LastName = "Button"
+                }, BenjaminButtonPassword);
+                var userId = userManager.FindByEmail(BenjaminButtonEmail).Id;
+                userManager.AddToRole(userId, "Project Manager");
+            }
+
+            if (!context.Users.Any(u => u.Email == ChevyChaseEmail))
+            {
+                userManager.Create(new ApplicationUser()
+                {
+                    Email = ChevyChaseEmail,
+                    UserName = ChevyChaseEmail,
+                    FirstName = "Chevy",
+                    LastName = "Chase"
+                }, ChevyChasePassword);
+                var userId = userManager.FindByEmail(ChevyChaseEmail).Id;
+                userManager.AddToRole(userId, "Developer");
+            }
+
+            if (!context.Users.Any(u => u.Email == DannyDeVitoEmail))
+            {
+                userManager.Create(new ApplicationUser()
+                {
+                    Email = DannyDeVitoEmail,
+                    UserName = DannyDeVitoEmail,
+                    FirstName = "Danny",
+                    LastName = "DeVito"
+                }, DannyDeVitoPassword);
+                var userId = userManager.FindByEmail(DannyDeVitoEmail).Id;
                 userManager.AddToRole(userId, "Submitter");
             }
 
@@ -374,7 +315,7 @@ namespace BugTracker_1._1.Migrations{
                 new TicketStatus() { Name = "Reopened" },
                 new TicketStatus() { Name = "Archived" }
                 );
-            
+
             //Project Seed
             context.Projects.AddOrUpdate(
                 p => p.Name,
@@ -383,11 +324,16 @@ namespace BugTracker_1._1.Migrations{
                 new Project() { Name = "City of Lights New Hire On-Boarding Software", Created = DateTime.Now.AddDays(-30), Description = "City of Lights Human Resources Department needs a new HR program for their newly hired employees." },
                 new Project() { Name = "Schools First Credit Union Financial Software", Created = DateTime.Now.AddDays(-15), Description = "Schools First is looking to purchase our Financial Portal software, but is asking us to customize." },
                 new Project() { Name = "UrTurn Bidding Software", Created = DateTime.Now.AddDays(-7), Description = "UrTurn start-up wants us to make a bidding software program." },
-                new Project() { Name = "Doublz Deli Register Software", Created = DateTime.Now.AddDays(-45), Description = "Doublz Deli purchased our Restaurant Cashier software."}
+                new Project() { Name = "Doublz Deli Register Software", Created = DateTime.Now.AddDays(-45), Description = "Doublz Deli purchased our Restaurant Cashier software." },
+                 new Project() { Name = "True Movies Streaming Service", Created = DateTime.Now.AddDays(-5), Description = "True Movies contracted with us to create an updatd online streaming portal." },
+                  new Project() { Name = "Pets Bin Dog Grooming Client Software", Created = DateTime.Now.AddDays(-15), Description = "Pets Bin purchased our new floor-to-ceiling client software." },
+                   new Project() { Name = "Syndicate Attorneys, LLP", Created = DateTime.Now, Description = "Syndicate Attorneys contracted with us to create a Client-Conflict program to avoid representing opposing parties." },
+                    new Project() { Name = "Tricycle Club Casino", Created = DateTime.Now.AddDays(-2), Description = "The Tricycle Club purchased our Human Resources On-Boarding software." }
+
                 );
             context.SaveChanges();
 
-            //// Assign users to projects by Role
+            // Assign users to projects by Role
             //foreach (var project in context.Projects.ToList())
             //{
             //    foreach (var user in userRolesHelper.UsersInRole("Admin"))
@@ -416,6 +362,8 @@ namespace BugTracker_1._1.Migrations{
             //    projectHelper.AddUserToProject(firstSubmitter, project.Id);
             //    projectHelper.AddUserToProject(secondSubmitter, project.Id);
             //}
+
+            // Creation of assignments to projects and tickets
 
             //foreach (var project in context.Projects.ToList())
             //{
@@ -454,9 +402,9 @@ namespace BugTracker_1._1.Migrations{
             //                    SubmitterId = submitters[random.Next(submitters.Count)].Id,
             //                    DeveloperId = developerId,
             //                    Created = DateTime.Now,
-            //                    Issue = $"Ticket type: {type.Name}. Status: {status.Name}. Priority: {priority.Name}",
-            //                    IssueDescription = $"This is a seeded ticket of type: {type.Name} for Project: {project.Name}.",
-            //                    IsResloved = resolved,
+            //                    Issue = $"Ticket type:{type.Name}. Status:{status.Name}. Priority:{priority.Name}",
+            //                    IssueDescription = $"This is a {type.Name} type of ticket for Project:{project.Name}.",
+            //                    IsResolved = resolved,
             //                    IsArchived = archived
             //                };
             //                ticketList.Add(newTicket);
@@ -467,11 +415,12 @@ namespace BugTracker_1._1.Migrations{
 
             //context.Tickets.AddRange(ticketList);
             //context.SaveChanges();
+            // end of creation of assignment of projects to projects and tickets
 
             var userList = context.Users.ToList();
             var projectList = context.Projects.ToList();
             foreach (var project in projectList)
-            {                
+            {
                 foreach (var user in userList)
                 {
                     projectHelper.AddUserToProject(user.Id, project.Id);
@@ -482,3 +431,4 @@ namespace BugTracker_1._1.Migrations{
         }
     }
 }
+

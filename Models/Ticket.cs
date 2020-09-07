@@ -33,7 +33,7 @@ namespace BugTracker_1._1.Models
         public string IssueDescription { get; set; }
         public DateTime Created { get; set; }
         public DateTime? Updated { get; set; }
-        public bool IsResloved { get; set; }
+        public bool IsResolved { get; set; }
         public bool IsArchived { get; set; }
         #endregion
 

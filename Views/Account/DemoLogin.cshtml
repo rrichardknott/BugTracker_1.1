@@ -1,6 +1,5 @@
 ﻿@using BugTracker_1._1.Models
 
-
 @{
     ViewBag.Title = "Log In";
     Layout = null;
@@ -56,8 +55,8 @@
                         {
                             
                             @Html.AntiForgeryToken()
-                            @Html.Hidden("emailKey", "DemoAdminEmail")
-                            @Html.Hidden("passwordKey", "DemoAdminPassword")
+                            @Html.Hidden("emailKey", "AlanAldaEmail")
+                            @Html.Hidden("passwordKey", "AlanAldaPassword")
                             <div class="form-group">
                                 <button type="submit" class="btn backgroundRed text-white" id="demoAdmin" /><span data-tooltip="Admins can create and edit all projects and tickets, and assign /unassign user to projects and tickets.">Demo Admin.</span><br /><i class="fas fa-arrow-alt-circle-right fa-1x"></i>
 
@@ -71,8 +70,8 @@
                         @using (Html.BeginForm("DemoLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "myForm" }))
                         {
                             @Html.AntiForgeryToken()
-                            @Html.Hidden("emailKey", "DemoProjectManagerEmail")
-                            @Html.Hidden("passwordKey", "DemoProjectManagerPassword")
+                            @Html.Hidden("emailKey", "BenjaminButtonEmail")
+                            @Html.Hidden("passwordKey", "BenjaminButtonPassword")
                             <div class="form-group">
                                 <button type="submit" class="btn backgroundDarkBlue text-white" id="demoLoginProjectManager" /><span data-tooltip="PMs can create and edit their projects and tickets as well as add comments and attachments to tickets">Demo Prj. Mgr.</span><br /><i class="fas fa-arrow-alt-circle-right fa-1x"></i>
                             </div>
@@ -85,8 +84,8 @@
                         @using (Html.BeginForm("DemoLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "myForm" }))
                         {
                             @Html.AntiForgeryToken()
-                            @Html.Hidden("emailKey", "DemoDeveloperEmail")
-                            @Html.Hidden("passwordKey", "DemoDeveloperPassword")
+                            @Html.Hidden("emailKey", "ChevyChaseEmail")
+                            @Html.Hidden("passwordKey", "ChevyChasePassword")
                             <div class="form-group">
                                 <button type="submit" class="btn backgroundGreen text-white" id="demoDeveloper" /><span data-tooltip="Developers can view their project tickets as well as their assigned tickets">Demo Developer</span><br /><i class="fas fa-arrow-alt-circle-right fa-1x"></i>
                             </div>
@@ -100,15 +99,15 @@
                         @using (Html.BeginForm("DemoLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "myForm" }))
                         {
                             @Html.AntiForgeryToken()
-                            @Html.Hidden("emailKey", "DemoSubmitterEmail")
-                            @Html.Hidden("passwordKey", "DemoSubmitterPassword")
+                            @Html.Hidden("emailKey", "DannyDeVitoEmail")
+                            @Html.Hidden("passwordKey", "DannyDeVitoPassword")
 
                             <div class="form-group">
                                 <button type="submit" class="btn backgroundYellow text-white" id="demoSubmitter" /><span data-tooltip="Submitters can view their assigned projects as well as their assigned tickets">Demo Submitter</span><br /><i class="fas fa-arrow-alt-circle-right fa-1x"></i>
                             </div>
                         }
 
-                    </div><!--ends herer-->
+                    </div><!--ends here-->
                 </div>
 
             </div>

@@ -83,10 +83,10 @@
 
 
                 <div id="ticketEditIsResolvedAndIsArchivedCheckboxContainer">
-                    @Html.LabelFor(model => model.IsResloved, "Resolved", htmlAttributes: new { @class = "font-weight-bold", id = "ticketEditIsResolvedCheckbox" })
+                    @Html.LabelFor(model => model.IsResolved, "Resolved", htmlAttributes: new { @class = "font-weight-bold", id = "ticketEditIsResolvedCheckbox" })
                     <div class="checkbox">
-                        @Html.EditorFor(model => model.IsResloved)
-                        @Html.ValidationMessageFor(model => model.IsResloved, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.IsResolved)
+                        @Html.ValidationMessageFor(model => model.IsResolved, "", new { @class = "text-danger" })
                     </div>
 
                     @Html.LabelFor(model => model.IsArchived, "Archived", htmlAttributes: new { @class = "font-weight-bold", id = "ticketEditIsArchivedCheckbox" })

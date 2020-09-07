@@ -21,7 +21,7 @@
 </div>
 <hr />
 
-
+<h3><b>Your assigned Projects:</b></h3>
 <div class="table-responsive">
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
@@ -111,7 +111,7 @@
                         @Html.DisplayFor(modelItem => item.Updated)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.IsResloved)
+                        @Html.DisplayFor(modelItem => item.IsResolved)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.IsArchived)
@@ -136,9 +136,9 @@
 @if (User.IsInRole("Developer") || (User.IsInRole("Admin")))
 
 {
-    <h3>Developer Tickets (Tickets assigned to you)</h3>
+    <h3><strong>Your assigned Tickets:</strong></h3>
     <div class="table-responsive">
-        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
             <thead>
 
                 <tr>
@@ -216,7 +216,7 @@
                             @Html.DisplayFor(modelItem => item.Updated)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.IsResloved)
+                            @Html.DisplayFor(modelItem => item.IsResolved)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.IsArchived)

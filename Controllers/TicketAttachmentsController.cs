@@ -54,7 +54,7 @@ namespace BugTracker_1._1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TicketId,FileName")] TicketAttachment ticketAttachment, string attachmentDescription, HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "TicketId,FileName,Description")] TicketAttachment ticketAttachment,  HttpPostedFileBase file)
         {
             if (file == null)
             {
@@ -72,7 +72,7 @@ namespace BugTracker_1._1.Controllers
                 {
                     ticketAttachment.Created = DateTime.Now;
                     ticketAttachment.UserId = User.Identity.GetUserId();
-                    ticketAttachment.Description = attachmentDescription;
+                    
 
                     var fileName = FileStamp.MakeUnique(file.FileName);
                     //Assign the filePath property and save the physical file

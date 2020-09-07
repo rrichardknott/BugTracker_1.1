@@ -23,16 +23,15 @@
         var userId = User.Identity.GetUserId();
         var userName = userHelper.GetFullName(userId);
         var currentRole = userRolesHelper.ListUserRoles(userId).FirstOrDefault();
+        ViewBag.Name = userName;
 
         if (currentRole != null)
         {
-            ViewBag.Role = currentRole;
-            ViewBag.Name = userName;
+            ViewBag.Role = currentRole;            
         }
         else
         {
-            ViewBag.Role = "No Role Assigned";
-            ViewBag.Name = "User";
+            ViewBag.Role = "No Role Assigned";            
         }
 
 
@@ -160,6 +159,10 @@
                                     <div>
                                         <ul class="text-white">
                                             <span class="h4 textDecorationUnderline">Admin</span>
+                                            <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Index","Projects")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;All Projects</a></li>
+
+                                            <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Index","Tickets")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;All Tickets</a></li>
+
                                             <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Create","Projects")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;Create a Project</a></li>
                                             <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Create","Tickets")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;Create a Ticket</a></li>
                                             <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Manageroles","Assignments")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;Assign Users</a></li>
@@ -223,7 +226,7 @@
                             <div class="card backgroundRed text-white mb-4">
                                 <div class="h3 card-body backgroundRed text-uppercase">Administrators</div>
                                 <div class="d-flex align-items-center justify-content-between backgroundRed">
-                                    <a class="small text-white" href="@Url.Action("Index","Projects")"><h5><ul><li>Create and Edit Projects and Tickets</li><li>Assign all Users to Projects and Ticket</li></ul></h5></a>
+                                    <a class="small text-white" href="@Url.Action("Index","Projects")"><h5><ul><li>Create / Edit Projects and Tickets</li><li>Assign all Users</li></ul></h5></a>
                                     <div class="small text-white"></i></div>
                                 </div>
                             </div>
@@ -233,7 +236,7 @@
                             <div class="card backgroundDarkBlue text-white mb-4">
                                 <div class=" h3 card-body backgroundDarkBlue text-uppercase">Project Mgrs.</div>
                                 <div class="d-flex align-items-center justify-content-between backgroundDarkBlue">
-                                    <a class="small text-white stretched-link" href="@Url.Action("Index","Projects")"><h5><ul><li>Create and Edit your Projects and Tickets</li><li>Add comments/attachments to Tickets</li></ul></h5></a>
+                                    <a class="small text-white stretched-link" href="@Url.Action("Index","Projects")"><h5><ul><li>Your Projects and Tickets</li><li>Ticket comments and attachments</li></ul></h5></a>
                                 </div>
                             </div>
                         </div>
@@ -241,7 +244,7 @@
                             <div class="card backgroundGreen text-white mb-4">
                                 <div class="h3 card-body backgroundGreen text-uppercase">Developers</div>
                                 <div class="d-flex align-items-center justify-content-between backgroundGreen">
-                                    <a class="small text-white stretched-link" href="@Url.Action("Index","Projects")"><h5><ul><li>View your Project Tickets</li><li>View your assigned Tickets</li></ul></h5></a>
+                                    <a class="small text-white stretched-link" href="@Url.Action("Index","Projects")"><h5><ul><li>Your Project Tickets</li><li>View your assigned Tickets</li></ul></h5></a>
                                 </div>
                             </div>
                         </div>
@@ -249,7 +252,7 @@
                             <div class="card backgroundYellow text-white mb-4">
                                 <div class="h3 card-body backgroundYellow text-uppercase">Submitters</div>
                                 <div class="d-flex align-items-center justify-content-between backgroundYellow">
-                                    <a class="small text-white stretched-link" href="@Url.Action("Index","Projects")"><h5><ul><li>View your assigned Projects and Tickets</li><li>Create a Ticket</li></ul></h5></a>
+                                    <a class="small text-white stretched-link" href="@Url.Action("Index","Projects")"><h5><ul><li>Your Project Tickets</li><li>Create a Ticket</li></ul></h5></a>
                                 </div>
                             </div>
                         </div>
@@ -299,7 +302,7 @@
         //Global Options
         @{ 
             var projectLabels = projectHelper.NameOfProject();
-            var numberOfTickets = ticketHelper.NumberOfTicketsOnProject(3);
+            var numberOfTickets = ticketHelper.NumberOfTicketsOnProject(1);
 
         }
         Chart.defaults.global.defaultFontFamily = "Garamond";
@@ -310,11 +313,11 @@
         let projectsChart = new Chart(myChart, {
             type: "bar", //different available types: bar, horizontal bar, pie, doughnut, radar, polarArea
             data: {
-                labels: ["Veteran's Park", "Circus Vargas", "City of Lights", "Schools First FCU", "UrTurn Bidding", "Doublz Deli"],
+                labels: ["","Veteran's Park", "Circus Vargas", "City of Lights", "Schools First FCU", "UrTurn Bidding", "Doublz Deli", "Pets Bin", "Syndicate Attorneys", "Tricycle Club", "True Movies"],
                 datasets: [{
                     label: "Project Tickets",
-                    data: [37, 40, 45, 49, 59, 69],
-                    backgroundColor: ["#33658A", "#86BBd8", "#758E4F", "#F6AE2D", "#F26419", "#A37871"],
+                    data: [0, 37, 40, 45, 49, 59, 69, 75, 80, 85, 100],
+                    backgroundColor: ["","#33658A", "#86BBd8", "#758E4F", "#F6AE2D", "#F26419", "#A37871", "#DD2D4A","#CBEEF3","#610345","#E3B505"],
                     borderWidth: 1,
                     borderColor: "#777777",
                     hoverBorderWidth: 3,

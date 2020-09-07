@@ -1,8 +1,12 @@
 ﻿@model BugTracker_1._1.Models.Project
+@using BugTracker_1._1.Helpers;
 @using Microsoft.AspNet.Identity;
 
 @{
     ViewBag.Page = "Project Details";
+    var ticketHelper = new TicketHelper();
+    var ticketsPlural = "";
+
 }
 
 <p>
@@ -13,8 +17,20 @@
     @Html.ActionLink("Back", "Index", new { id = Model.Id }, new { @class = "btn backgroundDarkBlue text-white width-7" })
 </p>
 
+@if (Model.Tickets.Count == 1)
+{
+    
+    ticketsPlural = "ticket";
+}
+else
+{
+    ticketsPlural = "tickets";
+}
+
+<h2>This project has @Model.Tickets.Count @ticketsPlural </h2>
+
 <div class="table-responsive">
-    <table  class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
             <tr>
                 <th>
@@ -29,7 +45,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.IsArchived)
                 </th>
-                
+
             </tr>
         </thead>
         <tbody>
@@ -46,9 +62,11 @@
                 <td>
                     @Html.DisplayFor(model => model.IsArchived)
                 </td>
+
             </tr>
         </tbody>
     </table>
 </div>
+<!--=============================================================================-->
 
 
