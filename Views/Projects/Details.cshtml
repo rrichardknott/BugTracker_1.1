@@ -5,8 +5,7 @@
 @{
     ViewBag.Page = "Project Details";
     var ticketHelper = new TicketHelper();
-    var ticketsPlural = "";
-
+    
 }
 
 <p>
@@ -17,20 +16,9 @@
     @Html.ActionLink("Back", "Index", new { id = Model.Id }, new { @class = "btn backgroundDarkBlue text-white width-7" })
 </p>
 
-@if (Model.Tickets.Count == 1)
-{
-    
-    ticketsPlural = "ticket";
-}
-else
-{
-    ticketsPlural = "tickets";
-}
-
-<h2>This project has @Model.Tickets.Count @ticketsPlural </h2>
 
 <div class="table-responsive">
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <table class="table table-bordered" width="100%" cellspacing="0">
         <thead>
             <tr>
                 <th>
@@ -43,9 +31,8 @@ else
                     @Html.DisplayNameFor(model => model.Created)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.IsArchived)
+                  # of Tickets
                 </th>
-
             </tr>
         </thead>
         <tbody>
@@ -60,13 +47,45 @@ else
                     @Html.DisplayFor(model => model.Created)
                 </td>
                 <td>
-                    @Html.DisplayFor(model => model.IsArchived)
-                </td>
-
+                   @Model.Tickets.Count
+                </td>                
             </tr>
         </tbody>
     </table>
 </div>
 <!--=============================================================================-->
+<h2>At-a-Glance view of Tickets on all of your Projects:</h2>
+<div class="table-responsive">
+    <table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>
+                    Project
+                </th>               
+                <th>
+                    Issue
+                </th>
+                <th>
+                    Created
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ticketHelper.GetProjectTickets())
+            {
+                <tr>
+                    <td>
+                        @item.Project.Name
+                    </td>                    
+                    <td>
+                        @item.Issue
+                    </td>
+                    <td>
+                        @item.Created
+                    </td>                   
 
-
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

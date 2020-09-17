@@ -23,7 +23,7 @@ namespace BugTracker_1._1.Helpers
             var userId = HttpContext.Current.User.Identity.GetUserId();
             var user = db.Users.Find(userId);
             var ticketList = new List<Ticket>();
-            ticketList = user.Projects.SelectMany(p => p.Tickets).ToList();
+            ticketList = user.Projects.SelectMany(p => p.Tickets).ToList();            
             return ticketList;
         }
 
@@ -227,7 +227,8 @@ namespace BugTracker_1._1.Helpers
         public List<TicketNotification> GetUnreadNotifications()
         {
             var currentUserId = HttpContext.Current.User.Identity.GetUserId();
-            return db.TicketNotifications.Include("Sender").Where(t => t.UserId == currentUserId && !t.IsRead).ToList();
+            var unreadTickets = db.TicketNotifications.Include("Sender").Where(t => t.UserId == currentUserId && !t.IsRead).ToList();
+            return unreadTickets;
         }
 
         public bool IsMyTicket(int id)

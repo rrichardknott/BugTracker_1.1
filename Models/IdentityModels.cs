@@ -91,6 +91,6 @@ namespace BugTracker_1._1.Models
         public System.Data.Entity.DbSet<BugTracker_1._1.Models.TicketNotification> TicketNotifications { get; set; }
 
         public System.Data.Entity.DbSet<BugTracker_1._1.Models.UserIndexViewModel> UserIndexViewModels { get; set; }
-        
+        public object Invitation { get; internal set; }
     }
 }

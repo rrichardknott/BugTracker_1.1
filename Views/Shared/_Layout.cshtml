@@ -27,17 +27,17 @@
 
         if (currentRole != null)
         {
-            ViewBag.Role = currentRole;            
+            ViewBag.Role = currentRole;
         }
         else
         {
-            ViewBag.Role = "No Role Assigned";            
+            ViewBag.Role = "No Role Assigned";
         }
 
 
     }
 
-    
+
     ViewBag.ProjectCount = projectHelper.NumberOfProjects();
     ViewBag.TicketCount = ticketHelper.TotalNumberOfTickets();
 }
@@ -69,7 +69,7 @@
 
 <body class="sb-nav-fixed" id="_LayoutBody">
     <nav class="sb-topnav navbar navbar-expand navbar-dark backgroundCharcoal" id="topNavbar">
-        
+
         <h4 class="brandTitle colorGoldenRod" href="@Url.Action("Index", "Home")">Richlynn Bug Tracker!</h4>
         <button class="btn btn-link btn-lg order-1 order-lg-0 text-white" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
         @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "text-white", id = "homeLink" })
@@ -101,13 +101,6 @@
 
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-
-            @*<div class="input-group">
-                <input class="form-control" id="navBarSearchBox" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
-                <div class="input-group-append">
-                    <button class="btn backgroundDarkBlue" type="button"><i class="fas fa-search" id="searchIcon"></i></button>
-                </div>
-            </div>*@
         </form>
         <!-- Navbar-->
         <ul class="navbar-nav ml-auto ml-md-0">
@@ -142,11 +135,11 @@
                         <a class="mb-5" id="homePageLeftColumnDashboardLink" href="@Url.Action("Index","Home")"><i class="fas fa-tachometer-alt" id="faTachometer"></i>Dashboard</a>
                         <!--added here begins-->
 
-                        <a class="nav-link collapsed text-decoration-none text-white" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="true"  aria-controls="collapseLayouts">
+                        <a class="nav-link collapsed text-decoration-none text-white" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="true" aria-controls="collapseLayouts">
 
 
 
-<div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                             Quick Access
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
@@ -166,7 +159,7 @@
                                             <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Create","Projects")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;Create a Project</a></li>
                                             <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Create","Tickets")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;Create a Ticket</a></li>
                                             <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Manageroles","Assignments")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;Assign Users</a></li>
-                                        </ul>                                        
+                                        </ul>
                                     </div>
                                     <div>
                                         <ul class="text-white">
@@ -190,14 +183,6 @@
                                 </nav>
                             </div>
 
-                            @*<a class="nav-link text-white" href="#">
-                <div class="sb-nav-link-icon"><i class="fas fa-chart-area text-white"></i></div>
-                Charts
-            </a>
-            <a class="nav-link text-white" href="#">
-                <div class="sb-nav-link-icon"><i class="fas fa-table text-white"></i></div>
-                Tables
-            </a>*@
                         </div>
                         <div class="h5 text-white" id="sideNavLoggedInRole">Logged in as role: @ViewBag.Role</div>
 
@@ -213,10 +198,10 @@
 
                     </div>
 
-                <!--logoff goes here-->
+                    <!--logoff goes here-->
             </nav>
         </div>
-       
+
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid">
@@ -257,7 +242,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     @RenderBody()
 
                     <!--MY CHART BEGINS-->
@@ -297,10 +282,11 @@
     <script src="~/Scripts/datatables-demo.js"></script>
     <script src="~/Scripts/jquery.dataTables.min.js"></script>
     <!--MY CHART BEGINS-->
-    <script> 
+    <script>
+
     /*Chart JS Begins Here*/
         //Global Options
-        @{ 
+        @{
             var projectLabels = projectHelper.NameOfProject();
             var numberOfTickets = ticketHelper.NumberOfTicketsOnProject(1);
 
@@ -309,33 +295,45 @@
         Chart.defaults.global.defaultFontSize = 22;
 
 
-        let myChart = $("#myChart")[0].getContext("2d")
-        let projectsChart = new Chart(myChart, {
-            type: "bar", //different available types: bar, horizontal bar, pie, doughnut, radar, polarArea
-            data: {
-                labels: ["","Veteran's Park", "Circus Vargas", "City of Lights", "Schools First FCU", "UrTurn Bidding", "Doublz Deli", "Pets Bin", "Syndicate Attorneys", "Tricycle Club", "True Movies"],
-                datasets: [{
-                    label: "Project Tickets",
-                    data: [0, 37, 40, 45, 49, 59, 69, 75, 80, 85, 100],
-                    backgroundColor: ["","#33658A", "#86BBd8", "#758E4F", "#F6AE2D", "#F26419", "#A37871", "#DD2D4A","#CBEEF3","#610345","#E3B505"],
-                    borderWidth: 1,
-                    borderColor: "#777777",
-                    hoverBorderWidth: 3,
-                    hoverBorderColor: "#000000"
-                }]
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: "Tickets Per Project",
-                    fontSize: 26
-                },
-                legend: {
-                    display: false
-                },
-            }
-        });
-    /*Chart JS Ends Here*/       
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            url: '@Url.Action("PopulateChart", "Charts")',
+            dataType: 'json',
+            success: function (response) {
+                let myChart = $("#myChart")[0].getContext("2d")
+                let projectsChart = new Chart(myChart, {
+                    type: "bar", //different available types: bar, horizontal bar, pie, doughnut, radar, polarArea
+                    data: {
+                        labels: response.Labels,
+                        datasets: [{
+                            label: "Project Tickets",
+                            data: response.Data,
+                            backgroundColor: ["#33658A", "#86BBd8", "#758E4F", "#F6AE2D", "#F26419", "#A37871", "#DD2D4A", "#CBEEF3", "#610345", "#E3B505"],
+                            borderWidth: 1,
+                            borderColor: "#777777",
+                            hoverBorderWidth: 3,
+                            hoverBorderColor: "#000000"
+                        }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: "Tickets Per Project",
+                            fontSize: 26
+                        },
+                        legend: {
+                            display: false
+                        },
+                    }
+                });
+    }
+
+        })
+
+
+
+    /*Chart JS Ends Here*/
     </script>
     <!--MY CHART ENDS-->
 

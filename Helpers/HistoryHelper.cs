@@ -78,7 +78,7 @@ namespace BugTracker_1._1.Helpers
 
         private void TypeUpdate(Ticket oldTicket, Ticket newTicket)
         {
-            if (oldTicket.TicketType != newTicket.TicketType)
+            if (oldTicket.TicketTypeId != newTicket.TicketTypeId)
             {
                 var history = new TicketHistory()
                 {
