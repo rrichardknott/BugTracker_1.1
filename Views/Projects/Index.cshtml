@@ -10,41 +10,48 @@
 
 @if (User.IsInRole("Admin"))
 {
-    <p>
-        @Html.ActionLink("Create Projects", "Create", "Projects", new { area = "" }, new { @class = "btn backgroundDarkBlue text-white", id = "createProjectButton" })
+<p>
+    @*@Html.ActionLink("Create Projects", "Create", "Projects", new { area = "" }, new { @class = "btn backgroundDarkBlue text-white", id = "createProjectButton" })
         @Html.ActionLink("Assign Users", "ManageProjectUsers", "Assignments", new { area = "" }, new { @class = "btn backgroundDarkBlue text-white", id = "assignUsersToProjectsButton" })
         @Html.ActionLink("Assign Roles", "Manageroles", "Assignments", new { area = "" }, new { @class = "btn backgroundDarkBlue text-white", id = "assignUsersToRolesButton" })
-        @Html.ActionLink("Remove Users", "RemoveUserFromProject", "Assignments", new { area = "" }, new { @class = "btn backgroundRed text-white", id = "removeUsersFromProjectsButton" })
+        @Html.ActionLink("Remove Users", "RemoveUserFromProject", "Assignments", new { area = "" }, new { @class = "btn backgroundRed text-white", id = "removeUsersFromProjectsButton" })*@
         @Html.ActionLink("View Tickets", "Index", "Tickets", new { area = "" }, new { @class = "btn backgroundYellow text-white", id = "viewTicketsButton" })
-    </p>
+        @Html.ActionLink("Create Ticket", "Create", "Tickets", new { area = "" }, new { @class = "btn backgroundYellow text-white ml-2", id = "createTicketsButton" })
+</p>
 
 }
 
 @if (User.IsInRole("Project Manager"))
 {
-    <p>
-        @Html.ActionLink("Create Projects", "Create", "Projects", new { area = "" }, new { @class = "btn backgroundDarkBlue text-white", id = "createProjectButton" })
-        @Html.ActionLink("Assign Users", "ManageProjectUsers", "Assignments", new { area = "" }, new { @class = "btn backgroundDarkBlue text-white", id = "assignUsersToProjectsButton" })
-        @Html.ActionLink("Remove Users", "RemoveUserFromProject", "Assignments", new { area = "" }, new { @class = "btn backgroundRed text-white", id = "removeUsersFromProjectsButton" })
-        @Html.ActionLink("View Tickets", "Index", "Tickets", new { area = "" }, new { @class = "btn backgroundYellow text-white", id = "viewTicketsButton" })
-    </p>
+<p>
+    @Html.ActionLink("Create Projects", "Create", "Projects", new { area = "" }, new { @class = "btn backgroundDarkBlue text-white", id = "createProjectButton" })
+    @Html.ActionLink("View Projects", "Index", "Projects", null, new { @class = "btn backgroundDarkBlue text-white" })
+    @Html.ActionLink("View Tickets", "Index", "Tickets", null, new { @class = "btn backgroundDarkBlue text-white", id = "viewTicketsButton" })
+    @Html.ActionLink("Assign Project", "ManageProjectUsers", "Assignments", new { area = "" }, new { @class = "btn backgroundDarkBlue text-white", id = "assignUsersToProjectsButton" })
+    @Html.ActionLink("Unassign Project", "RemoveUserFromProject", "Assignments", new { area = "" }, new { @class = "btn backgroundDarkBlue text-white", id = "removeUsersFromProjectsButton" })
+
+
+</p>
 
 }
 <div class="applyFlexBox">
 
-    @if (User.IsInRole("Developer") || User.IsInRole("Submitter"))
+    @if (User.IsInRole("Developer"))
     {
-        <p>
-            @Html.ActionLink("View Tickets", "Index", "Tickets", new { area = "" }, new { @class = "btn backgroundYellow text-white", id = "viewTicketsButton" })
-        </p>
+    <p>
+        @Html.ActionLink("View Projects", "Index", "Projects", null, new { @class = "btn backgroundGreen text-white" })
+        @Html.ActionLink("View Tickets", "Index", "Tickets", new { area = "" }, new { @class = "btn backgroundGreen text-white", id = "viewTicketsButton" })
+    </p>
 
     }
 
     @if (User.IsInRole("Submitter"))
     {
-        <p>
-            @Html.ActionLink("Create Ticket", "Create", "Tickets", new { area = "" }, new { @class = "btn backgroundDarkBlue text-white ml-2", id = "createTicketsButton" })
-        </p>
+    <p>
+        @Html.ActionLink("View Projects", "Index", "Projects", null, new { @class = "btn backgroundYellow text-white" })
+        @Html.ActionLink("View Tickets", "Index", "Tickets", new { area = "" }, new { @class = "btn backgroundYellow text-white", id = "viewTicketsButton" })
+        @Html.ActionLink("Create Ticket", "Create", "Tickets", new { area = "" }, new { @class = "btn backgroundYellow text-white ml-2", id = "createTicketsButton" })
+    </p>
 
     }
 </div>

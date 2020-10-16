@@ -21,6 +21,9 @@
         e.preventDefault();
         $("body").toggleClass("sb-sidenav-toggled");
     });
+
+    // Set aria-expanded to true for layout side navigation links
+        $("#sideNavigationLinks").attr("aria-expanded", "true");
        
        
     /*Sweet Alert Register Page

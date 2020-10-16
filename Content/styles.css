@@ -2536,7 +2536,7 @@ textarea.form-control {
     background-color: transparent;
     border: 1px solid transparent;
     padding: 0.375rem 0.75rem;
-    font-size: 1rem;
+    /*font-size: 1rem;*/
     line-height: 1.5;
     border-radius: 0.25rem;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -11049,6 +11049,11 @@ th, td{
     text-decoration: underline;
 }
 
+.displayNone{
+    display:none;
+    margin-top: 0;
+}
+
 
 
 
@@ -11147,7 +11152,7 @@ body{
 
 #demoLoginColumn {    
     display: flex;
-    height: 70vh;
+    height: 60%;
     flex-direction: column;
     justify-content: center;
     text-align: center;
@@ -11281,7 +11286,7 @@ button #demoLoginAdmin {
     justify-content: center;
     text-align: center;
     position: relative;
-    bottom: 18%;
+    bottom: 14%;
     width: 100%;
     margin: 0;
     padding: 0;
@@ -11289,7 +11294,7 @@ button #demoLoginAdmin {
 
 #demoRowLoginButtons button{
     width: 100%;
-    height: 15vh;
+    height: 10vh;
     font-size: larger;
     font-weight: bold;
 }
@@ -11386,6 +11391,8 @@ button #demoLoginAdmin {
 #faTachometer{
     margin-left: 7%;
     margin-right: 3%;
+    position: relative;    
+    margin-bottom: 1.5%;
 
 }
 #homePageLeftColumnDashboardLink{
@@ -11450,24 +11457,30 @@ button #demoLoginAdmin {
     height: 25vh;
 }
 
-#assignUsersButton, #backToProjectsButton, #removeUsersButton, #removeUsersBackButton {
+#assignUsersButton, #backToProjectsButton {
     width: 15%;
     margin-top: 1%;
     margin-bottom: 2%;
 }
 
-/*Assignments Manage Roles*/
+#removeUsersButton, #removeUsersBackButton{
+    width: 140px;
+    margin-top: 1%;
+    margin-bottom: 2%;
+}
 
+
+/*Assignments Manage Roles*/
 #assignmentsManageRolesAssignAndBackButtonContainer {
-    width: 50%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: left;
 }
 
 #assignmentsManageRolesAssignButton, #assignmentsManageRolesBackButton {
-    width: 100px;
-    margin-right: 0.5%;
+    width: 140px;
+    margin-right: 1%;
     margin-bottom: 2%;
 }
 
@@ -11505,20 +11518,11 @@ button #demoLoginAdmin {
 
 
 #ticketIndexBackButton, #ticketIndexCreateButton{
-    width: 110px;
+    width: 140px;
     margin-right: 1%;
     margin-bottom: 2%;
     
 }
-
-#ticketIndexBackButton {
-
-}
-
-#ticketIndexCreateButton {
-    
-}
-
 
 
 /*Tickets Create*/
@@ -11661,7 +11665,10 @@ button #demoLoginAdmin {
     padding: 0.75rem 1rem;
     position: relative;
     border: none;
+    font-size: 1.0rem !important;
 }
+
+
 
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */

@@ -70,7 +70,7 @@
 <body class="sb-nav-fixed" id="_LayoutBody">
     <nav class="sb-topnav navbar navbar-expand navbar-dark backgroundCharcoal" id="topNavbar">
 
-        <h4 class="brandTitle colorGoldenRod" href="@Url.Action("Index", "Home")">Richlynn Bug Tracker!</h4>
+        <h4 class="brandTitle colorGoldenRod mt-2 ml-2" href="@Url.Action("Index", "Home")">Richlynn Bug Tracker!</h4>
         <button class="btn btn-link btn-lg order-1 order-lg-0 text-white" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
         @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "text-white", id = "homeLink" })
         @Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "text-white", id = "aboutLink" })
@@ -131,59 +131,102 @@
 
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading text-white"></div>
-                        <a class="mb-5" id="homePageLeftColumnDashboardLink" href="@Url.Action("Index","Home")"><i class="fas fa-tachometer-alt" id="faTachometer"></i>Dashboard</a>
+                        <div class="h2 sb-sidenav-menu-heading text-white"></div>
+                        <div class="h2 text-white mb-1"><a class="h2 mb-5" id="homePageLeftColumnDashboardLink" href="@Url.Action("Index","Home")"><i class="h3 fas fa-tachometer-alt" id="faTachometer"></i></a>Dashboard</div>
                         <!--added here begins-->
 
-                        <a class="nav-link collapsed text-decoration-none text-white" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="true" aria-controls="collapseLayouts">
+                        <a id="sideNavigationLinks"class="nav-link collapsed text-decoration-none text-white" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-controls="collapseLayouts" aria-expanded="true">
 
 
 
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Quick Access
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            @*<div class="sb-nav-link-icon"><i class="@*fas fa-columns h2"></i></div>*@
+                            <h2>Navigate</h2>
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-arrow-alt-circle-down"></i></div>
                         </a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                        <!--line 147: hard coded 'show' to have sidenav buttons expand on page load-->
+                        <div class="collapse show" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                             <!--added here ends-->
 
 
                             <div>
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <div>
-                                        <ul class="text-white">
-                                            <span class="h4 textDecorationUnderline">Admin</span>
-                                            <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Index","Projects")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;All Projects</a></li>
+                                    <!---------------ADMINISTRATOR START--------------->
 
-                                            <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Index","Tickets")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;All Tickets</a></li>
 
-                                            <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Create","Projects")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;Create a Project</a></li>
-                                            <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Create","Tickets")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;Create a Ticket</a></li>
-                                            <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Manageroles","Assignments")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;Assign Users</a></li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <ul class="text-white">
-                                            <span class="h4 textDecorationUnderline">Project Mgr.</span>
-                                            <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Create","Projects")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;Create a Project</a></li>
-                                            <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Index","Tickets")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;Edit a Ticket</a></li>
-                                            <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Manageroles","Assignments")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;Assign Users</a></li>
-                                        </ul>
-                                    </div>
-                                    <ul class="text-white">
-                                        <span class="h4 textDecorationUnderline">Developers</span>
-                                        <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Index","Projects")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;View Projects</a></li>
-                                        <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Index","Tickets")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;View Tickets</a></li>
-                                    </ul>
-                                    <ul class="text-white">
-                                        <span class="h4 textDecorationUnderline">Submitters</span>
-                                        <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Create","Tickets")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;Create a Ticket</a></li>
-                                        <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Index","Tickets")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;View Tickets</a></li>
-                                        <li class="text-decoration-none listStyleTypeNone"><a class="text-white text-decoration-none" href="@Url.Action("Index","Projects")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">&bull;&nbsp;&nbsp;View Projects</a></li>
-                                    </ul>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <h4 class="text-white">Admin</h4>
+
+                                        <button class="btn backgroundRed text-lg-center width-80 mt-0"><a class="text-white" href="@Url.Action("Create", "Tickets")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">Create Ticket</a></button>
+
+                                        <button class="btn backgroundRed text-lg-center width-80 mt-2"><a class="text-white" href="@Url.Action("Create","Projects")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">Create Project</a></button>
+
+                                        <button class="btn backgroundRed text-lg-center width-80 mt-2"><a class="text-white" href="@Url.Action("Index","Tickets")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">All Tickets</a></button>
+
+                                        <button class="btn backgroundRed text-lg-center width-80 mt-2"><a class="text-white" href="@Url.Action("Index","Projects")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">All Projects</a></button>
+
+                                        <button class="btn backgroundRed text-lg-center width-80 mt-2"><a class="text-white" href="@Url.Action("Manageroles","Assignments")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">User Roles</a></button>
+
+                                        <button class="btn backgroundRed text-lg-center width-80 mt-2"><a class="text-white" href="@Url.Action("ManageProjectUsers","Assignments")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">Assign Project</a></button>
+
+                                        <button class="btn backgroundRed text-lg-center width-80 mt-2"><a class="text-white" href="@Url.Action("RemoveUserFromProject","Assignments")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">Unassign Project</a></button>
+
+                                    }
+                                    @* <!---------------ADMINISTRATOR END--------------->
+
+
+                    <!---------------PROJECT MANAGER START--------------->*@
+
+                                    else if (User.IsInRole("Project Manager"))
+                                    {
+                                        <h4 class="mt-3 text-white">Project Mgrs.</h4>
+
+                                        <button class="btn backgroundDarkBlue text-lg-center width-80 mt-0"><a class="text-white" href="@Url.Action("Create","Projects")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">Create Project</a></button>
+
+                                        <button class="btn backgroundDarkBlue text-lg-center width-80 mt-2"><a class="text-white" href="@Url.Action("Index","Projects")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">View Projects</a></button>
+
+                                        <button class="btn backgroundDarkBlue text-lg-center width-80 mt-2"><a class="text-white" href="@Url.Action("Index","Tickets")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">View Ticket</a></button>
+
+                                        <button class="btn backgroundDarkBlue text-lg-center width-80 mt-2 "><a class="text-white" href="@Url.Action("ManageProjectUsers","Assignments")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">Assign Project</a></button>
+
+                                        <button class="btn backgroundDarkBlue text-lg-center width-80 mt-2 "><a class="text-white" href="@Url.Action("RemoveUserFromProject","Assignments")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">Unassign Project</a></button>
+                                    }
+                                    @*<!---------------PROJECT MANAGER END--------------->
+
+
+                    <!---------------DEVELOPER START--------------->*@
+
+
+                                    else if (User.IsInRole("Developer"))
+                                    {
+                                        <h4 class="text-white">Developers</h4>
+
+                                        <button class="btn backgroundGreen text-lg-center width-80 mt-0"><a class="text-white" href="@Url.Action("Index","Projects")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">View Projects</a></button>
+
+                                        <button class="btn backgroundGreen text-lg-center width-80 mt-2 mb-3"><a class="text-white" href="@Url.Action("Index","Tickets")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">View Tickets</a></button>
+                                    }
+
+                                    @*<!---------------DEVELOPER END--------------->
+
+
+                    <!---------------SUBMITTER START--------------->*@
+                                    else if (User.IsInRole("Submitter"))
+                                    {
+
+                                        <h4 class="text-white">Submitters</h4>
+                                        <button class="btn backgroundYellow text-lg-center width-80 mt-2"><a class="text-white" href="@Url.Action("Index","Projects")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">View Projects</a></button>
+
+                                        <button class="btn backgroundYellow text-lg-center width-80 mt-2"><a class="text-white" href="@Url.Action("Index","Tickets")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">View Tickets</a></button>
+
+                                        <button class="btn backgroundYellow text-lg-center width-80 mt-2"><a class="text-white" href="@Url.Action("Create","Tickets")" data-toggle="" data-target="" aria-expanded="true" aria-controls="">Create Ticket</a></button>
+                                    }
+                                    <!---------------SUBMITTER END--------------->
+
                                 </nav>
                             </div>
 
                         </div>
+
                         <div class="h5 text-white" id="sideNavLoggedInRole">Logged in as role: @ViewBag.Role</div>
 
                         <!--Show this if user is logged in (authenticated)-->
@@ -324,7 +367,14 @@
                         },
                         legend: {
                             display: false
-                        },
+                        },                        
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
                     }
                 });
     }
