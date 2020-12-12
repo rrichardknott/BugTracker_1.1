@@ -11149,13 +11149,73 @@ body{
 }
 /*Demo Login Page*/
 
+.demoLogin{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, auto);
+    
+}
 
-#demoLoginColumn {    
+
+
+.demoLoginTitle {
+    grid-column: 1 / 2;
+    grid-row: 2 / 2;
+
+    font-weight: 500;
+    font-family: 'Bilbo Swash Caps', cursive;
+    margin-right: 2%;
+    color: darkred;
+    letter-spacing: 5px;
+    
+}
+
+.demoLoginTitle {
+}
+
+.demoLoginTitleR {
+    font-size: 48px;
+}
+
+#demoRowLoginButtons {
+    grid-column: 1 / 2;
+    grid-row: 3 / 3;
+
+    color: #ffffff;
     display: flex;
-    height: 60%;
-    flex-direction: column;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;    
+    padding: 0;
+    bottom: 300px;
+}
+
+#demoRowLoginButtons button {
+    width: 125px;
+    height: 12vh;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.demo-bg-login-image{   
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+}
+
+
+#demoLoginColumn {
+    display: grid;       
     justify-content: center;
     text-align: center;
+    height: 60vh;
+    margin-bottom: 50px;
+    
+    
+}
+
+#demoLoginBox{
+    min-height: 90vh;
 }
 
 #demoLoginBox h3 {
@@ -11172,17 +11232,7 @@ body{
     
 }
 
-.demoLoginTitle {
-    font-weight: 500;
-    font-family: 'Bilbo Swash Caps', cursive;
-    margin-right: 2%;
-    color: darkred;
-    letter-spacing: 5px;
-}
 
-.demoLoginTitleR {
-    font-size: 48px;
-}
 /*===========TOOLTIP DEMO ADMIN============*/
 [data-tooltip]{
     position: relative;
@@ -11279,25 +11329,7 @@ button #demoLoginAdmin {
     border-radius: 1%;
 }
 
-#demoRowLoginButtons {
-    color: #ffffff;
-    display: flex;   
-    flex-direction: row;
-    justify-content: center;
-    text-align: center;
-    position: relative;
-    bottom: 14%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
 
-#demoRowLoginButtons button{
-    width: 100%;
-    height: 10vh;
-    font-size: larger;
-    font-weight: bold;
-}
 
 
 /*_Layout Body*/
@@ -11671,11 +11703,204 @@ button #demoLoginAdmin {
 
 
 
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (max-width: 1500px) {
-   #fullEmail{
-       display: none;
-   }
+
+/*=======================MEDIA QUERIES=============================*/
+/* Extra small devices (phones, 599px and down) */
+@media only screen and (max-width: 599px) {
+    .brandTitle{
+        font-size: 16px;
+    }
+    
+    .demo-bg-login-image {
+        background: none !important;
+    }
+
+    .demoLogin {
+        background: #ffffff;
+        width: 100%;
+    }
+
+    #demoLoginBox .col-8 {
+        max-width: 100%;
+        
+    }
+
+    #demoLoginColumn {
+        height: 30vh;
+    }
+
+    #demoRowLoginButtons {
+        display: grid;
+        grid-template-columns: repeat(1, auto);
+        grid-template-rows: repeat(4, auto);
+        width: 350px;
+        margin: auto;
+        margin-top: 20%;
+    }
+
+    #demoRowLoginButtons button {
+        width: 300px;
+        margin: 0 auto;
+    }
+
+    #demoRowLoginButtons i {
+        margin-left: 5%;
+    }
+
+    #demoAdminButton {
+        grid-column: 2;
+        grid-row: 1;
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    #demoProjectManagerButton {
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    #demoDeveloperButton {
+        grid-column: 2;
+        grid-row: 3;
+    }
+
+    #demoSubmitterButton {
+        grid-column: 2;
+        grid-row: 4;
+    }
+    
 }
 
+/* Small devices (portrait tablets and large phones, 600px to 767) */
+@media only screen and (min-width: 600px) and (max-width: 767px) {    
+    
 
+    .demo-bg-login-image {
+        background: none !important;
+    }
+
+    .demoLogin {
+        background: #ffffff;
+        width: 100%;
+    }
+
+    #demoLoginBox .col-8 {
+        max-width: 100%;
+    }
+
+    #demoLoginColumn {
+        height: 30vh;
+    }
+
+    #demoRowLoginButtons {
+        display: grid;
+        grid-template-columns: repeat(1, auto);
+        grid-template-rows: repeat(4, auto);
+        width: 350px;
+        margin: auto;
+        margin-top: 20%;
+    }
+
+    #demoRowLoginButtons button{
+        width: 300px;
+        margin: 0 auto;
+    }
+
+    #demoRowLoginButtons i {
+        margin-left: 5%;
+    }
+
+    #demoAdminButton {
+        grid-column: 2;
+        grid-row: 1;
+        
+        
+    }
+
+    #demoProjectManagerButton {
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    #demoDeveloperButton {
+        grid-column: 2;
+        grid-row: 3;
+    }
+
+    #demoSubmitterButton {
+        grid-column: 2;
+        grid-row: 4;
+    }
+    
+}
+
+/* Medium devices (landscape tablets, 768px to 991px) */
+@media only screen and (min-width: 768px) and (max-width: 991px) { 
+
+    .demo-bg-login-image {
+        background: none !important;
+    }
+
+    .demoLogin {
+        background: #ffffff;
+        width: 100%;
+    }
+
+    #demoLoginBox .col-8 {
+        max-width: 100%;
+    }
+
+    #demoLoginColumn {
+        height: 30vh;
+    }
+
+    #demoRowLoginButtons {
+        display: grid;
+        grid-template-columns: repeat(1, auto);
+        grid-template-rows: repeat(4, auto);
+        width: 350px;
+        margin: auto;
+        margin-top: 20%;
+    }
+
+    #demoRowLoginButtons button {
+        width: 300px;
+        margin: 0 auto;
+    }
+
+    #demoRowLoginButtons i{
+        margin-left: 5%;
+    }
+
+    #demoAdminButton {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    #demoProjectManagerButton {
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    #demoDeveloperButton {
+        grid-column: 2;
+        grid-row: 3;
+    }
+
+    #demoSubmitterButton {
+        grid-column: 2;
+        grid-row: 4;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px to 1199px) */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+
+
+}
+
+/* Desktop (Monitors 1200px and higher*/
+
+@media only screen and (min-width: 1200px){
+
+}

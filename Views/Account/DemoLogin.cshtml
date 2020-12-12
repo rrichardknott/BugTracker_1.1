@@ -36,20 +36,13 @@
         <!-- Outer Row -->
         <div class="row justify-content-center" id="demoLoginBox">
 
-            <div class="col-8">
-                <h3 class="demoLoginTitle mb-lg-5"><span class="demoLoginTitleR">R</span>ichlynn Bug Tracker!</h3>
-                <div id="demoLoginColumn" class="demo-bg-login-image">
-                    <section id="demoSection">
-                        <h3 class="colorDarkBlue demoLoginTitle">Demo Version</h3>
-                    </section>
+            <div class="col-8 demoLogin">
+                <h3 class="demoLoginTitle mb-lg-5"><span class="demoLoginTitleR">R</span>ichlynn Bug Tracker! <br /> Demo Version</h3>
+                <div id="demoLoginColumn" class="demo-bg-login-image">                    
                 </div>
-                <div class="row" id="demoRowLoginButtons">
-                    <div class="col-3">
-                        <!--added here-->
-                        @*<div class="tooltip">
-            Hover over me
-            <span class="tooltiptext">Tooltip text</span>
-        </div>*@
+                <div id="demoRowLoginButtons">
+                    <div class="col-3" id="demoAdminButton">
+                        
 
                         @using (Html.BeginForm("DemoLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "myForm" }))
                         {
@@ -58,14 +51,14 @@
                             @Html.Hidden("emailKey", "AlanAldaEmail")
                             @Html.Hidden("passwordKey", "AlanAldaPassword")
                             <div class="form-group">
-                                <button type="submit" class="btn backgroundRed text-white" id="demoAdmin" /><span data-tooltip="Admins can create and edit all projects and tickets, and assign /unassign user to projects and tickets.">Demo Admin.</span><br /><i class="fas fa-arrow-alt-circle-right fa-1x"></i>
+                                <button type="submit" class="btn backgroundRed text-white" id="demoAdmin" /><span data-tooltip="Admins can create and edit all projects and tickets, and assign /unassign user to projects and tickets.">Demo Admin.</span><i class="fas fa-arrow-alt-circle-right fa-1x"></i>
 
                             </div>
                         }
 
                     </div><!--ends here-->
 
-                    <div class="col-3">
+                    <div class="col-3" id="demoProjectManagerButton">
                         <!--added here-->
                         @using (Html.BeginForm("DemoLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "myForm" }))
                         {
@@ -73,13 +66,13 @@
                             @Html.Hidden("emailKey", "BenjaminButtonEmail")
                             @Html.Hidden("passwordKey", "BenjaminButtonPassword")
                             <div class="form-group">
-                                <button type="submit" class="btn backgroundDarkBlue text-white" id="demoLoginProjectManager" /><span data-tooltip="PMs can create and edit their projects and tickets as well as add comments and attachments to tickets">Demo Prj. Mgr.</span><br /><i class="fas fa-arrow-alt-circle-right fa-1x"></i>
+                                <button type="submit" class="btn backgroundDarkBlue text-white" id="demoLoginProjectManager" /><span data-tooltip="PMs can create and edit their projects and tickets as well as add comments and attachments to tickets">Demo Prj. Mgr.</span><i class="fas fa-arrow-alt-circle-right fa-1x"></i>
                             </div>
                         }
                         <!--ends herer-->
                     </div>
 
-                    <div class="col-3">
+                    <div class="col-3" id="demoDeveloperButton">
                         <!--added here-->
                         @using (Html.BeginForm("DemoLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "myForm" }))
                         {
@@ -87,13 +80,13 @@
                             @Html.Hidden("emailKey", "ChevyChaseEmail")
                             @Html.Hidden("passwordKey", "ChevyChasePassword")
                             <div class="form-group">
-                                <button type="submit" class="btn backgroundGreen text-white" id="demoDeveloper" /><span data-tooltip="Developers can view their project tickets as well as their assigned tickets">Demo Developer</span><br /><i class="fas fa-arrow-alt-circle-right fa-1x"></i>
+                                <button type="submit" class="btn backgroundGreen text-white" id="demoDeveloper" /><span data-tooltip="Developers can view their project tickets as well as their assigned tickets">Demo Developer</span><i class="fas fa-arrow-alt-circle-right fa-1x"></i>
                             </div>
                         }
                         <!--ends herer-->
                     </div>
 
-                    <div class="col-3">
+                    <div class="col-3" id="demoSubmitterButton">
                         <!--added here-->
 
                         @using (Html.BeginForm("DemoLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "myForm" }))
@@ -103,7 +96,7 @@
                             @Html.Hidden("passwordKey", "DannyDeVitoPassword")
 
                             <div class="form-group">
-                                <button type="submit" class="btn backgroundYellow text-white" id="demoSubmitter" /><span data-tooltip="Submitters can view their assigned projects as well as their assigned tickets">Demo Submitter</span><br /><i class="fas fa-arrow-alt-circle-right fa-1x"></i>
+                                <button type="submit" class="btn backgroundYellow text-white" id="demoSubmitter" /><span data-tooltip="Submitters can view their assigned projects as well as their assigned tickets">Demo Submitter</span><i class="fas fa-arrow-alt-circle-right fa-1x"></i>
                             </div>
                         }
 
