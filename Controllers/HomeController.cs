@@ -1,11 +1,8 @@
 ﻿using BugTracker_1._1.Models;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Net.Mail;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace BugTracker_1._1.Controllers
@@ -37,7 +34,6 @@ namespace BugTracker_1._1.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public async Task<ActionResult> Contact(EmailModel model)
         {
             if (ModelState.IsValid)
@@ -63,7 +59,7 @@ namespace BugTracker_1._1.Controllers
                     await Task.FromResult(0);
                 }
             }
-            
+
             return View(model);
         }
     }

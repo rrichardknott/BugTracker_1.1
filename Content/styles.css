@@ -11147,13 +11147,23 @@ body{
     position: relative;
     top: 10%;
 }
-/*Demo Login Page*/
 
-.demoLogin{
+#exampleModalLabel{
+   text-align: center!important;
+   color: red;
+   text-transform: uppercase;
+}
+
+#myButton{
+    display: none;
+}
+
+
+/*Demo Login Page*/
+.demoLogin {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(3, auto);
-    
 }
 
 
